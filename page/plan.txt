@@ -1,0 +1,49 @@
+Canvas Render Enginer 整合绘图
+Color System 应用momentun UI style
+Motion Chart (Ash.s.IRD)
+
+1 merge momentum color system
+    D3.color
+    d3-scale
+    d3-interpolate 位置取值
+    Zooming (d3-zoom)
+
+2 canvas render engineer
+
+    SVG
+
+    canvas
+        d3.path();
+        d3-polygon(); 多变形节点运算
+
+3 draw with data
+    // d3-shape
+
+    bar
+    line
+    ring
+
+4 d3-dispatch
+
+:Dragging (d3-drag)
+
+d3.easeLinear => bind value to axis different with axis
+
+Animation 
+    d3-time
+
+Core
+    Selections (d3-selection)   
+    d3-interpolate !!!!
+    d3-format   格式转换
+    Fetches     读取文件
+    Path d3-dsv 路径转换
+    Random Numbers (d3-random) 随机数
+
+not use 
+    d3-force    //积分加速度
+    d3-contour  //热图
+    d3-geo      //地图
+    d3-hierarchy  //Tree map flow
+    Quadtrees (d3-quadtree) 四树
+    Voronoi Diagrams (d3-voronoi)

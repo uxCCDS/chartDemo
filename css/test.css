@@ -1,0 +1,41 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+.bg{
+    background: url('../img//bg.png') no-repeat top left;
+    background-size: contain;
+    width: 1440px;
+    height: 940px;
+    position: relative;
+}
+
+.chart_content{
+	position: absolute;
+	left: 104px;
+	top: 283px;
+	width: 1315px;
+	height: 657px;
+	display: flex;
+	flex-direction: row;
+}
+.chart_content_left {
+	flex: none;
+	width: 1000px;
+}
+.chart_content_right {
+	flex: none;
+	width: 315px;
+}
+.chart_top{
+	height: 26px;
+	margin-top: 10px;
+	background: url('../img/dots.png') no-repeat right center;
+}
+.chart_top select{ height: 26px; line-height: 26px;}
+.chart_content_left .svgCon{width: 100%; height: 250px; position: relative; margin-top: 10px;}
+.chart_content_left .svgCon svg{position: absolute; top: 0px; left: 0px;}
+.chart_content_right .svgCon{width: 100%; height: 140px; margin-top: 10px;}
+
+.canvasAxis text{fill: #858688; font-size: 10px; stroke: none;}
+.canvasAxis path{stroke: #D8D8D8; fill: none;}
