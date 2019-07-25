@@ -19,26 +19,26 @@ var Jabber = {
 		],
 	usage: {
 		Product: [  
-			{ name: 'Webex Meeitngs',value: 50},
-			{ name: 'Cisco Jabber',	 value: 39},
-			{ name: 'Cisco Devices', value: 6},
-			{ name: 'Webex Teams',	 value: 5}
+			{ name: 'Webex Meeitngs',value: 50, idx: 0},
+			{ name: 'Cisco Jabber',	 value: 39, idx: 1},
+			{ name: 'Cisco Devices', value: 6, idx: 2},
+			{ name: 'Webex Teams',	 value: 5, idx: 3}
 			],
 		Activity: [
-			{ name: 'Messaging',value: 65 },
-			{ name: 'Video',	value: 16 },
-			{ name: 'Sharing',	value: 25}
+			{ name: 'Messaging',value: 65 , idx: 0},
+			{ name: 'Sharing',	value: 25, idx: 1},
+			{ name: 'Video',	value: 10 , idx: 2}
 			],
 		Group: [
-			{ name:'Enginnering', value: 11	},
-			{ name:'Finanace',    value: 24	},
-			{ name:'Sales',		  value: 65	}
+			{ name:'Enginnering', value: 10	, idx: 2},
+			{ name:'Finanace',    value: 25	, idx: 1},
+			{ name:'Sales',		  value: 65	, idx: 0}
 			],
 		Location: [
-			{ name: 'iOS', 	   value: 20 },
-			{ name: 'Win',	   value: 36 },
-			{ name: 'Android', value: 24 },
-			{ name: 'Mac',     value: 20 }
+			{ name: 'iOS', 	   value: 20 , idx: 0},
+			{ name: 'Win',	   value: 36 , idx: 1},
+			{ name: 'Android', value: 24 , idx: 2},
+			{ name: 'Mac',     value: 20 , idx: 3}
 			]
 	}
 };
@@ -63,26 +63,26 @@ var Webex = {
 		],
 	usage: {
 		Product: [  
-			{ name: 'Webex Meeitngs',value: 50},
-			{ name: 'Cisco Jabber',	 value: 30},
-			{ name: 'Cisco Devices', value: 10},
-			{ name: 'Webex Teams',	 value: 10}
+			{ name: 'Webex Meeitngs',value: 50, idx: 0},
+			{ name: 'Cisco Jabber',	 value: 30, idx: 1},
+			{ name: 'Cisco Devices', value: 10, idx: 2},
+			{ name: 'Webex Teams',	 value: 10, idx: 3}
 			],
 		Activity: [
-			{ name: 'Messaging',value: 45 },
-			{ name: 'Video',	value: 16 },
-			{ name: 'Sharing',	value: 15}
+			{ name: 'Messaging',value: 50 , idx: 0},
+			{ name: 'Sharing',	value: 30, idx: 1},
+			{ name: 'Video',	value: 20 , idx: 2}
 			],
 		Group: [
-			{ name:'Enginnering', value: 20	},
-			{ name:'Finanace',    value: 35	},
-			{ name:'Sales',		  value: 45	}
+			{ name:'Enginnering', value: 20	, idx: 2},
+			{ name:'Finanace',    value: 35	, idx: 1},
+			{ name:'Sales',		  value: 45	, idx: 0}
 			],
 		Location: [
-			{ name: 'iOS', 	   value: 10 },
-			{ name: 'Win',	   value: 46 },
-			{ name: 'Android', value: 24 },
-			{ name: 'Mac',     value: 20 }
+			{ name: 'iOS', 	   value: 10 , idx: 0},
+			{ name: 'Win',	   value: 46 , idx: 1},
+			{ name: 'Android', value: 24 , idx: 2},
+			{ name: 'Mac',     value: 20 , idx: 3}
 			]
 	}
 };

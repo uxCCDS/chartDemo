@@ -34,8 +34,8 @@
 }
 .chart_top select{ height: 26px; line-height: 26px;}
 .chart_content_left .svgCon{width: 100%; height: 250px; position: relative; margin-top: 10px;}
-.chart_content_left .svgCon svg{position: absolute; top: 0px; left: 0px;}
-.chart_content_right .svgCon{width: 100%; height: 140px; margin-top: 10px;}
+.chart_content_left .svgCon svg, .chart_content_right .svgCon svg{position: absolute; top: 0px; left: 0px;}
+.chart_content_right .svgCon{width: 100%; height: 140px; position: relative; margin-top: 10px;}
 
 .canvasAxis text{fill: #858688; font-size: 10px; stroke: none;}
 .canvasAxis path{stroke: #D8D8D8; fill: none;}
