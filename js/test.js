@@ -601,10 +601,10 @@
 				    ease: d3.easeCubicOut
 				 };
 				Hub.transition(ts, _data);
-				//BOARDr1.render(ts, _usage.Product);
-				//BOARDr2.render(ts, _usage.Activity);
-				//BOARDr3.render(ts, _usage.Group);
-				//BOARDr4.render(ts, _usage.Location);
+				BOARDr1.transition(ts, _usage.Product);
+				BOARDr2.transition(ts, _usage.Activity);
+				BOARDr3.transition(ts, _usage.Group);
+				BOARDr4.transition(ts, _usage.Location);
 			}
 		});
 	};
