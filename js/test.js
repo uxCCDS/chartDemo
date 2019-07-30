@@ -328,24 +328,28 @@
 
 	//150- 55  95 205
 	var createTxtConfig = function(leftTxts, yTop){
-		var o,arr = [];
+		var o,arr = [],
+			y,y2,w;
 		for(var n in leftTxts){
 			o = leftTxts[n];
+			y = o.y - yTop;
+			y = y < 12 ? 12 : y;
+			y2 = y+11;
 			if(o.l){
 				arr.push({
-					x: 95 - o.d - o.w,
-					y: o.y - yTop,
-					y2: o.y - yTop + 11,
+					x: 95 - o.d,
+					y: y,
+					y2: y2,
 					width: o.w + 'px',
-					tl: o.tl || 'left'
+					anchor: 'end'
 				});
 			}else{
 				arr.push({
 					x: 205 + o.d,
-					y: o.y - yTop,
-					y2: o.y - yTop + 11,
+					y: y,
+					y2: y2,
 					width: o.w + 'px',
-					tl: o.tl || 'left'
+					anchor: 'start'
 				});
 			}
 
@@ -374,8 +378,8 @@
 					width: function(d, i){
 						return textSettings[i].width;
 					},
-					'text-align': function(d, i){
-						return textSettings[i].tl;
+					'text-anchor': function(d, i) {
+						return textSettings[i].anchor;
 					}
 				}
 			}
@@ -399,8 +403,8 @@
 					width: function(d, i){
 						return textSettings[i].width;
 					},
-					'text-align': function(d, i){
-						return textSettings[i].tl;
+					'text-anchor': function(d, i) {
+						return textSettings[i].anchor;
 					}
 				}
 			}
