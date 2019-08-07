@@ -44,12 +44,10 @@ var displayColor = function(num, colorPersets) {
 		  	h: function (d) {
 		    	return d;
 		  	},
-		  	w: 16
+		  	w: 12
 		},
 		modify: {
 			attr: {
-				rx: 2,
-				ry: 2
 			},
 		  	style: {
 		    	fill: function (d, i) {
@@ -67,6 +65,8 @@ window.onload = function(argument) {
 	displayColor(20, 'ColorWheel');
 	displayColor(30, 'ColorWheel');
 	displayColor(40, 'ColorWheel');
+	displayColor(60, 'ColorWheel');
+	displayColor(80, 'ColorWheel');
 	displayColor(40, '12Colors');
 	displayColor(40, '10Colors');
 	displayColor(40, '8Colors');
