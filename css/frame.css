@@ -135,7 +135,7 @@ h6 {
     cursor: pointer;
 }
 
-.contain_l .nav:hover {
+.contain_l .nav:hover, .contain_l .nav_current {
     background: #0A5E7D;
 }
 
