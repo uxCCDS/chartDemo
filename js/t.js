@@ -1,6 +1,9 @@
 
 
-var gBoard = function(){
+var gBoard = function(num, colorPersets, root){
+	var p = document.createElement('p');
+		p.innerHTML = colorPersets + ' with ' + num + ' colors';
+	root.append(p);
 	return new MomentumChart.Board('#app', {
 	    attr: {
 	      width: '1000',
@@ -9,7 +12,7 @@ var gBoard = function(){
 	    },
 	    style: {
 	      'background-color': '#f2f4f5',
-	      'margin-top': '10px'
+	      'margin': '7px 0 14px 0'
 	    }
 	});
 };
@@ -21,17 +24,16 @@ var gData = function(l) {
 	}
 	return a;
 };
-
-var displayColor = function(num, colorPersets) {
-	var p = document.createElement('p');
-	p.innerHTML = colorPersets + ' with ' + num + ' colors';
-	document.getElementById('app').append(p);
-
+var regHsl = /Hsl$/;
+var displayColor = function(num, colorPersets, root) {
 	var colorsSet = new MomentumChart.Colors(colorPersets),
 		colors = colorsSet.scheme(num),
 		data = gData(num),
-		board = gBoard(),
+		board = gBoard(num, colorPersets, root),
 		step = (1000 - 20) / num >> 0;
+	if (regHsl.test(colorPersets)) {
+		root.append(document.createElement('HR'));
+	}
 	board.data(data);
 	board.rect({
 		generator: {
@@ -61,17 +63,9 @@ var displayColor = function(num, colorPersets) {
 };
 
 window.onload = function(argument) {
-	displayColor(10, 'ColorWheel');
-	displayColor(20, 'ColorWheel');
-	displayColor(30, 'ColorWheel');
-	displayColor(40, 'ColorWheel');
-	displayColor(60, 'ColorWheel');
-	displayColor(80, 'ColorWheel');
-	displayColor(40, '12Colors');
-	displayColor(40, '10Colors');
-	displayColor(40, '8Colors');
-	displayColor(40, '3Colors');
-	displayColor(40, 'jmt');
-	displayColor(40, 'quality');
-	displayColor(40, 'AudioSourcesColors');
+  var root = document.getElementById('app');
+  var presets = MomentumChart.Colors.allPersets();
+  for (var name in presets) {
+    displayColor(40, name, root);
+  }
 };
