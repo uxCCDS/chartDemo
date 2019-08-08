@@ -1,0 +1,114 @@
+<!DOCTYPE>
+<html>
+	<head>
+		<title>Cisco Webex</title>
+		<meta http-equiv="Access-Control-Allow-Origin" content="*">
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" >
+		<meta name="mobileoptimized" content="0" >
+		<meta name="apple-mobile-web-app-capable" content="yes" >
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+        <meta name="format-detection" content="telephone=no">
+        <link rel="stylesheet" type="text/css" href="../css/momentum-chart.css">
+		<link rel="stylesheet" type="text/css" href="../css/frame.css">	
+		<script type="text/javascript" src='../js/d3.v5.js'></script>
+        <script type="text/javascript" src='../ts/momentum-ui-chart-min.js'></script>
+        <script type="text/javascript" src='../js/dataGenerate.js' ></script>
+		<script type="text/javascript" src='../js/webex.js'></script>
+	</head>
+	<body>
+        <textarea id='template_card' class='hidden'>
+            <div class='card'>
+                <div class='card_title'>$title$</div>      
+                <a class='card_edit'></a>
+                <a class='card_write'></a>
+                <h1>$sum$<span class='$arrow$'>$increase$%<i></i></span></h1>
+                <p>$percentage$% of total users</p>
+            </div>
+        </textarea>
+		<div class='contain'>
+			<div class='contain_l'>
+                <div class='nav nav_top icon_pro_badge'></div>
+                <div class='nav icon_home'></div>
+                <div class='nav icon_company'></div>
+                <div class='nav icon_location'></div>
+                <div class='nav icon_cloud'></div>
+                <div class='nav icon_endpoint'></div>
+                <div class='nav icon_analysis'></div>
+                <div class='nav icon_diagnostics'></div>
+                <div class='nav icon_settings'></div>
+                <div class='nav nav_bottom icon_avatar'></div>
+            </div>
+            <div class='contain_r'>
+                <div class='top_titile'>Jabber</div>
+                <div class='contain_chart'>
+                    <div class='contain_chart_padding'></div>
+                    <div class='contain_chart_c'>
+                        <div class='date_container'>
+                            <div class='date_container_input'>
+                                <span>30 Days</span><span class='date_container_range'>4/22/19 - 5/22/19</span>
+                            </div>
+                        </div>    
+                        <div class='card_container'>
+                            <div class='card_container_display' id='card_container_display'></div>
+                            <div class='card_container_add'></div>
+                        </div> 
+                        <div class='tab_header'>
+                            <a class='current'>Total</a>
+                            <a>IM</a>
+                            <a>Calls</a>
+                            <a>Desktop Share</a>
+                            <a>Contacts</a>
+                            <a>Login</a>
+                            <a class='plus_12'></a>
+                        </div>
+                        <div class='board_panel'>
+                            <div class='board_bars'>
+                                <div class='board_bar' id='board_bar1'>
+                                    <select class='innerSelector'>
+                                        <option class='innerSelectorOption' value='0'>Usage by Meetings</option>
+                                        <option class='innerSelectorOption' selected="selected" value='1'>Usage by Participant Minutes</option>
+                                    </select>
+                                    <div class='sTab'>
+                                        <a class='current'>Daily</a><a>Weekly</a><a>Monthly</a>
+                                    </div>
+                                </div>
+                                <div class='board_bar lastBoard'>
+                                    <select class='innerSelector'>
+                                        <option value='0'>Participants by Roles</option>
+                                        <option value='1'>Participants by Join Methods</option>
+                                        <option selected="selected"  value='2'>Participants by Video Usage</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class='board_pies'>
+                                <div class='board_pie'></div>
+                                <div class='board_pie'></div>
+                                <div class='board_pie'></div>
+                                <div class='board_pie lastBoard'></div>
+                            </div>
+                        </div>
+                        <div class='board_panel_bottom'>
+                            <div class='board_pie_card'>
+                                <select class='innerSelectorLong'>
+                                    <option selected="selected"  value='0'>Top 10 Meetings by Meeting Size</option>
+                                </select>
+                            </div>
+                            <div class='board_pie_card'>
+                                <select class='innerSelectorLong'>
+                                    <option selected="selected"  value='0'>Top 10 Meetings by Meeting Size</option>
+                                </select>
+                            </div>
+                            <div class='board_pie_card lastBoard'>
+                                <select class='innerSelectorLong'>
+                                    <option selected="selected"  value='0'>Top 10 Meetings by Meeting Size</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='contain_chart_padding'></div>
+                </div>
+            </div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,535 @@
+@font-face {
+    font-family: 'CiscoSansTT Bold';
+    font-style: normal;
+    font-weight: 400;
+    src: url(../fonts/CiscoSansTTBold.woff2) format("woff2"), url(../fonts/CiscoSansTTBold.woff) format("woff");
+    font-display: fallback
+}
+
+@font-face {
+    font-family: 'CiscoSansTT Bold Oblique';
+    font-style: normal;
+    font-weight: 400;
+    src: url(../fonts/CiscoSansTTBoldOblique.woff2) format("woff2"), url(../fonts/CiscoSansTTBoldOblique.woff) format("woff");
+    font-display: fallback
+}
+
+@font-face {
+    font-family: 'CiscoSansTT Extra Light';
+    font-style: normal;
+    font-weight: 400;
+    src: url(../fonts/CiscoSansTTExtraLight.woff2) format("woff2"), url(../fonts/CiscoSansTTExtraLight.woff) format("woff");
+    font-display: fallback
+}
+
+@font-face {
+    font-family: 'CiscoSansTT Extra Light Oblique';
+    font-style: normal;
+    font-weight: 400;
+    src: url(../fonts/CiscoSansTTExtraLightOblique.woff2) format("woff2"), url(../fonts/CiscoSansTTExtraLightOblique.woff) format("woff");
+    font-display: fallback
+}
+
+@font-face {
+    font-family: 'CiscoSansTT Heavy';
+    font-style: normal;
+    font-weight: 400;
+    src: url(../fonts/CiscoSansTTHeavy.woff2) format("woff2"), url(../fonts/CiscoSansTTHeavy.woff) format("woff");
+    font-display: fallback
+}
+
+@font-face {
+    font-family: 'CiscoSansTT Heavy Oblique';
+    font-style: normal;
+    font-weight: 400;
+    src: url(../fonts/CiscoSansTTHeavyOblique.woff2) format("woff2"), url(../fonts/CiscoSansTTHeavyOblique.woff) format("woff");
+    font-display: fallback
+}
+
+@font-face {
+    font-family: 'CiscoSansTT Light';
+    font-style: normal;
+    font-weight: 400;
+    src: url(../fonts/CiscoSansTTLight.woff2) format("woff2"), url(../fonts/CiscoSansTTLight.woff) format("woff");
+    font-display: fallback
+}
+
+@font-face {
+    font-family: 'CiscoSansTT Light Oblique';
+    font-style: normal;
+    font-weight: 400;
+    src: url(../fonts/CiscoSansTTLightOblique.woff2) format("woff2"), url(../fonts/CiscoSansTTLightOblique.woff) format("woff");
+    font-display: fallback
+}
+
+@font-face {
+    font-family: 'CiscoSansTT Regular';
+    font-style: normal;
+    font-weight: 400;
+    src: url(../fonts/CiscoSansTTRegular.woff2) format("woff2"), url(../fonts/CiscoSansTTRegular.woff) format("woff");
+    font-display: fallback
+}
+
+@font-face {
+    font-family: 'CiscoSansTT Regular Oblique';
+    font-style: normal;
+    font-weight: 400;
+    src: url(../fonts/CiscoSansTTRegularOblique.woff2) format("woff2"), url(../fonts/CiscoSansTTRegularOblique.woff) format("woff");
+    font-display: fallback
+}
+
+@font-face {
+    font-family: 'CiscoSansTT Thin';
+    font-style: normal;
+    font-weight: 400;
+    src: url(../fonts/CiscoSansTTThin.woff2) format("woff2"), url(../fonts/CiscoSansTTThin.woff) format("woff");
+    font-display: fallback
+}
+
+@font-face {
+    font-family: 'CiscoSansTT Thin Oblique';
+    font-style: normal;
+    font-weight: 400;
+    src: url(../fonts/CiscoSansTTThinOblique.woff2) format("woff2"), url(../fonts/CiscoSansTTThinOblique.woff) format("woff");
+    font-display: fallback
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'CiscoSansTT Regular';
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-style: normal;
+}
+
+.hidden {
+    display: none;
+}
+
+.contain {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+}
+
+.contain_l {
+    width: 80px;
+    flex: none;
+    background: #24282B;
+    position: relative;
+    min-height: 1024px;
+}
+
+.contain_l .nav {
+    display: block;
+    width: 80px;
+    height: 48px;
+    position: relative;
+    cursor: pointer;
+}
+
+.contain_l .nav:hover {
+    background: #0A5E7D;
+}
+
+.contain_l .nav::before {
+    content: '';
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+.contain_l .nav_top {
+    margin: 26px 0;
+}
+
+.contain_l .nav_bottom {
+    position: absolute;
+    left: 0px;
+    bottom: 18px;
+}
+
+.contain_r {
+    flex: 1;
+
+}
+
+.contain_chart {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+
+.contain_chart_padding {
+    flex: none;
+    width: 32px;
+}
+
+.contain_chart_c {
+    flex: 1;
+}
+
+.icon_home::before {
+    background-image: url('../img/icon/home-active_24_w.svg');
+}
+
+.icon_company::before {
+    background-image: url('../img/icon/company_24_w.svg');
+}
+
+.icon_location::before {
+    background-image: url('../img/icon/location_24_w.svg');
+}
+
+.icon_cloud::before {
+    background-image: url('../img/icon/cloud_24_w.svg');
+}
+
+.icon_endpoint::before {
+    background-image: url('../img/icon/endpoint_24_w.svg');
+}
+
+.icon_analysis::before {
+    background-image: url('../img/icon/analysis_24_w.svg');
+}
+
+.icon_diagnostics::before {
+    background-image: url('../img/icon/diagnostics_24_w.svg');
+}
+
+.icon_settings::before {
+    background-image: url('../img/icon/settings_24_w.svg');
+}
+
+.icon_avatar::before {
+    background-image: url('../img/icon/avatar.svg');
+}
+
+.icon_pro_badge::before {
+    background-image: url('../img/icon/pro-badge_28_w.svg');
+}
+
+.top_titile {
+    width: 100%;
+    height: 63px;
+    line-height: 63px;
+    text-indent: 32px;
+    color: #000000;
+    font-size: 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.date_container {
+    width: 1294px;
+    height: 60px;
+    position: relative;
+}
+
+.date_container_input {
+    width: 258px;
+    height: 34px;
+    position: absolute;
+    right: 0px;
+    top: 12px;
+    border-radius: 4px;
+    border: 1px solid #D2D5D6;
+    background: url('../img/icon/arrow-up_16_w.svg') no-repeat 230px center;
+}
+
+.date_container_input span {
+    color: #171B1F;
+    line-height: 34px;
+    margin-left: 16px;
+    font-size: 16px;
+}
+
+.date_container_input .date_container_range {
+    color: #535759;
+    margin-left: 8px;
+}
+
+.card_container {
+    height: 112px;
+    display: flex;
+    width: 1294px;
+    flex-direction: row;
+}
+
+.card_container_display {
+    height: 112px;
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+}
+
+.card_container_add {
+    height: 110px;
+    width: 30px;
+    flex: none;
+    background: #F2F4F5 url('../img/icon//plus_14.svg') no-repeat center;
+    border-radius: 4px;
+    border: 1px solid #D2D5D6;
+    cursor: pointer;
+}
+
+.card {
+    width: 190px;
+    height: 110px;
+    border-radius: 4px;
+    border: 1px solid #D2D5D6;
+    position: relative;
+    flex: none;
+    margin-right: 18px;
+}
+
+.card:hover .card_edit,
+.card:hover .card_write {
+    display: block;
+}
+
+.card_edit,
+.card_write {
+    display: none;
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+    top: 12px;
+}
+
+.card_edit {
+    background-image: url('../img/icon/pen_12.svg');
+    right: 24px;
+}
+
+.card_write {
+    background-image: url('../img/icon/delete_12.svg');
+    right: 8px;
+}
+
+.card_title {
+    height: 40px;
+    line-height: 40px;
+    text-indent: 16px;
+    color: #535759;
+    font-size: 12px;
+}
+
+.card>h1 {
+    height: 32px;
+    line-height: 32px;
+    text-indent: 16px;
+    color: #24282B;
+    font-size: 26px;
+}
+
+.card>h1>span {
+    text-indent: 0px;
+    display: inline-block;
+    font-size: 14px;
+    margin-left: 12px;
+    height: 24px;
+    line-height: 24px;
+}
+
+.card>h1>span>i {
+    display: inline-block;
+    height: 24px;
+    line-height: 24px;
+    width: 24px;
+    background-position: center 16px;
+    background-repeat: no-repeat;
+}
+
+.card>h1>.up {
+    color: #16A693;
+}
+
+.card>h1>.up>i {
+    background-image: url('../img/icon/arrow-filled-up_12_w.svg');
+}
+
+.card>h1>.down {
+    color: #D93829;
+}
+
+.card>h1>.down>i {
+    background-image: url('../img/icon/arrow-filled-down_12_w.svg');
+}
+
+.card>p {
+    height: 16px;
+    line-height: 16px;
+    text-indent: 16px;
+    color: #535759;
+    font-size: 12px;
+    margin-top: 12px;
+}
+
+.tab_header {
+    margin-top: 20px;
+    border-bottom: 1px solid #D2D5D6;
+    height: 34px;
+    line-height: 34px;
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+}
+
+.tab_header a{
+    display: block;
+    border-radius: 4px 4px 0 0;
+    font-size: 12px;
+    color: #171B1F;
+    height: 33px;
+    line-height: 33px;
+    background: #F2F4F5;
+    text-align: center;
+    border: 1px solid #D2D5D6;
+    flex: none;
+    margin-right: 8px;
+    padding: 0 16px;
+    cursor: pointer;
+    position: relative;
+}
+
+.tab_header .plus_12::after{
+    content: '';
+    display: block;
+    width: 33px;
+    height: 33px;
+    position: absolute;
+    top: 0px; 
+    left: 0px;
+    background: url('../img/icon/plus_12.svg') no-repeat center;
+}
+
+.tab_header .current{
+    background: white;
+    border-bottom-color: white;
+}
+
+.board_panel {
+    margin-top: 12px;
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+}
+
+.board_bars {
+    width: 966px;
+    height: 688px;
+    flex: none;
+    margin-right: 16px;
+}
+
+.board_bar {
+    width: 964px;
+    height: 474px;
+    border: 1px solid #E6E8E8;
+    margin-bottom: 12px;
+    position: relative;
+}
+
+.board_pies {
+    width: 310px;
+    flex: none;
+}
+
+.board_pie {
+    width: 310px;
+    height: 230px;
+    margin-bottom: 12px;
+    border: 1px solid #E6E8E8;
+    position: relative;
+}
+
+.board_panel_bottom {
+    margin-top: 12px;
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    margin-bottom: 36px;
+}
+
+.board_pie_card {
+    width: 418px;
+    height: 338px;
+    border: 1px solid #E6E8E8;
+    margin-right: 16px;
+    position: relative;
+}
+
+.lastBoard {
+    margin-bottom: 0px;
+    margin-right: 0px;
+}
+
+.innerSelector, .innerSelectorLong{
+    border: rgba(0,0,0,0.12) 1px solid;
+    border-radius: 4px;
+    height: 32px;
+    line-height: 32px;
+    text-align: left;
+    color: #171B1F;
+    font-size: 12px;
+    text-indent: 7px;
+    appearance: none;
+    -moz-appearance:none;
+    -webkit-appearance:none;
+    width: 200px;
+    background:  white url('../img/icon/arrow-down-optical_8.svg') 180px center no-repeat;
+    background-size: 8px;
+    position: absolute;
+    top: 20px;
+    left: 24px;
+    outline: none;
+    padding: 0px;
+}
+
+.innerSelectorLong {
+    width: 280px;
+    top: 12px;
+    left: 12px;
+    background:  white url('../img/icon/arrow-down-optical_8.svg') 260px center no-repeat;
+}
+
+.sTab {
+    width: 236px;
+    height: 20px;
+    position: absolute;
+    left: 338px;
+    top: 26px;
+}
+
+.sTab a {
+    font-size: 12px;
+    color: #9B9B9B;
+    display: inline-block;
+    width: 53px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    border-radius: 4px;
+    margin-right: 22px;
+    cursor: pointer;
+}
+
+.sTab .current {
+    background: #D8D8D8;
+    color: black;
+}

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="20px" viewBox="0 0 24 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 56.2 (81672) - https://sketch.com -->
+    <title>hardware/endpoint_24_w</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Control-Hub/Site-Nav-Left/Collapsed-Analytics" transform="translate(-28.000000, -306.000000)" fill="#FFFFFF">
+            <g id="Group-2" transform="translate(0.000000, 112.000000)">
+                <g id="hardware/endpoint_24_w" transform="translate(28.000000, 192.000000)">
+                    <g id="endpoint_24_w" transform="translate(0.000000, 2.000000)">
+                        <path d="M11.5,1 C11.224,1 11,0.776 11,0.5 C11,0.224 11.224,0 11.5,0 L12.5,0 C12.776,0 13,0.224 13,0.5 C13,0.776 12.776,1 12.5,1 L11.5,1 Z M2.50050165,2 L21.4994984,2 C22.8804873,2 24,3.12598062 24,4.50282288 L24,17.4971771 C24,18.879448 22.8746206,20 21.4994984,20 L2.50050165,20 C1.11951272,20 0,18.8740194 0,17.4971771 L0,4.50282288 C0,3.12055197 1.12537944,2 2.50050165,2 Z M1,17.4971771 C1,18.3241517 1.67421141,19 2.50050165,19 L21.4994984,19 C22.3245167,19 23,18.3249836 23,17.4971771 L23,4.50282288 C23,3.67584834 22.3257886,3 21.4994984,3 L2.50050165,3 C1.67548327,3 1,3.67501637 1,4.50282288 L1,17.4971771 Z M1,15 L23,15 L23,16 L1,16 L1,15 Z M1,16 L1,15 L1,16 Z M23,15 L23,16 L23,15 Z" id="fill"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

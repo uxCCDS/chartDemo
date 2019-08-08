@@ -1,0 +1,29 @@
+/*!
+ * momentum-chart v1.0.0 (undefined)
+ * momentum style chart library
+ * Copyright 2013-2019 Cisco Momentum Team
+ */
+.md-chart-arc {
+  fill: #00a0d1; }
+
+.md-chart-area {
+  fill: #00a0d1; }
+
+.md-chart-axis {
+  fill: #00a0d1; }
+
+.md-chart-board {
+  position: relative; }
+
+.md-board-chart {
+  stroke: #00a0d1;
+  fill: none; }
+
+.md-chart-preload {
+  fill: #00a0d1; }
+
+.md-chart-rect {
+  fill: #00a0d1; }
+
+.md-chart-text {
+  color: #00a0d1; }

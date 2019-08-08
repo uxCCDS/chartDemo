@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="18px" viewBox="0 0 24 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 56.2 (81672) - https://sketch.com -->
+    <title>network/cloud_24_w</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Control-Hub/Site-Nav-Left/Collapsed-Analytics" transform="translate(-28.000000, -259.000000)" fill="#FFFFFF">
+            <g id="Group-2" transform="translate(0.000000, 112.000000)">
+                <g id="network/cloud_24_w" transform="translate(28.000000, 144.000000)">
+                    <g id="cloud_24_w" transform="translate(0.000000, 3.000000)">
+                        <path d="M11,1 C7.967,1 5.5,3.468 5.5,6.5 C5.5,6.741 5.333,7.043 5.095,7.087 C2.722,7.521 1,9.587 1,12 C1,14.757 3.243,17 6,17 L17,17 C20.309,17 23,14.309 23,11 C23,7.691 20.309,5 17,5 C16.934,5 16.87,5.005 16.805,5.009 L16.684,5.017 C16.457,5.038 16.259,4.892 16.186,4.683 C15.414,2.48 13.329,1 11,1 M17,18 L6,18 C2.691,18 0,15.309 0,12 C0,9.244 1.872,6.865 4.507,6.192 C4.668,2.75 7.519,0 11,0 C13.627,0 15.991,1.593 16.995,4 L17,4 C20.86,4 24,7.141 24,11 C24,14.859 20.86,18 17,18" id="fill"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
