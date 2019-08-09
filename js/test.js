@@ -95,13 +95,13 @@
 		});
 		var _config = {
 			generator: {
-		      x: function(d, i) {
+		     x: function(d, i) {
 		        return scaleX(d.x);
 		      },
 		      y: function(d) {
 		        return scaleY(d.y);
 		      }
-		    },
+		    } ,
 		    modify: {
 		      attr: {
 		        stroke: 'rgba(216,216,216,0.5)',

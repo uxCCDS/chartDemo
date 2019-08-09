@@ -65,16 +65,16 @@
                         <div class='board_panel'>
                             <div class='board_bars'>
                                 <div class='board_bar' id='board_bar1'>
-                                    <select class='innerSelector'>
-                                        <option class='innerSelectorOption' value='0'>Usage by Meetings</option>
-                                        <option class='innerSelectorOption' selected="selected" value='1'>Usage by Participant Minutes</option>
+                                    <select class='innerSelector' id='bar1Select'>
+                                        <option class='innerSelectorOption' selected="selected" value='0'>Usage by Meetings</option>
+                                        <option class='innerSelectorOption' value='1'>Usage by Participant Minutes</option>
                                     </select>
-                                    <div class='sTab'>
+                                    <div class='sTab' id='subTabs'>
                                         <a class='current'>Daily</a><a>Weekly</a><a>Monthly</a>
                                     </div>
                                 </div>
-                                <div class='board_bar lastBoard'>
-                                    <select class='innerSelector'>
+                                <div class='board_bar lastBoard' id='board_bar2'>
+                                    <select class='innerSelector' id='bar2Select'>
                                         <option value='0'>Participants by Roles</option>
                                         <option value='1'>Participants by Join Methods</option>
                                         <option selected="selected"  value='2'>Participants by Video Usage</option>
@@ -82,10 +82,10 @@
                                 </div>
                             </div>
                             <div class='board_pies'>
-                                <div class='board_pie'></div>
-                                <div class='board_pie'></div>
-                                <div class='board_pie'></div>
-                                <div class='board_pie lastBoard'></div>
+                                <div class='board_pie' id='board_pie1'><i class='board_pie_icon'></i></div>
+                                <div class='board_pie' id='board_pie2'></div>
+                                <div class='board_pie' id='board_pie3'><i class='board_pie_icon'></i></div>
+                                <div class='board_pie lastBoard' id='board_pie4'></div>
                             </div>
                         </div>
                         <div class='board_panel_bottom'>

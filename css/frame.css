@@ -135,7 +135,8 @@ h6 {
     cursor: pointer;
 }
 
-.contain_l .nav:hover, .contain_l .nav_current {
+.contain_l .nav:hover,
+.contain_l .nav_current {
     background: #0A5E7D;
 }
 
@@ -284,6 +285,7 @@ h6 {
     cursor: pointer;
 }
 
+
 .card {
     width: 190px;
     height: 110px;
@@ -390,7 +392,7 @@ h6 {
     flex-direction: row;
 }
 
-.tab_header a{
+.tab_header a {
     display: block;
     border-radius: 4px 4px 0 0;
     font-size: 12px;
@@ -407,18 +409,18 @@ h6 {
     position: relative;
 }
 
-.tab_header .plus_12::after{
+.tab_header .plus_12::after {
     content: '';
     display: block;
     width: 33px;
     height: 33px;
     position: absolute;
-    top: 0px; 
+    top: 0px;
     left: 0px;
     background: url('../img/icon/plus_12.svg') no-repeat center;
 }
 
-.tab_header .current{
+.tab_header .current {
     background: white;
     border-bottom-color: white;
 }
@@ -458,6 +460,17 @@ h6 {
     position: relative;
 }
 
+.board_pie_icon {
+    display: block;
+    width: 20px; 
+    height: 20px;
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    z-index: 10;
+    background: url('../img//icon/notification outline copy 11.svg') no-repeat center;
+}
+
 .board_panel_bottom {
     margin-top: 12px;
     display: flex;
@@ -479,8 +492,9 @@ h6 {
     margin-right: 0px;
 }
 
-.innerSelector, .innerSelectorLong{
-    border: rgba(0,0,0,0.12) 1px solid;
+.innerSelector,
+.innerSelectorLong {
+    border: rgba(0, 0, 0, 0.12) 1px solid;
     border-radius: 4px;
     height: 32px;
     line-height: 32px;
@@ -489,10 +503,10 @@ h6 {
     font-size: 12px;
     text-indent: 7px;
     appearance: none;
-    -moz-appearance:none;
-    -webkit-appearance:none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
     width: 200px;
-    background:  white url('../img/icon/arrow-down-optical_8.svg') 180px center no-repeat;
+    background: white url('../img/icon/arrow-down-optical_8.svg') 180px center no-repeat;
     background-size: 8px;
     position: absolute;
     top: 20px;
@@ -505,7 +519,7 @@ h6 {
     width: 280px;
     top: 12px;
     left: 12px;
-    background:  white url('../img/icon/arrow-down-optical_8.svg') 260px center no-repeat;
+    background: white url('../img/icon/arrow-down-optical_8.svg') 260px center no-repeat;
 }
 
 .sTab {
@@ -532,4 +546,22 @@ h6 {
 .sTab .current {
     background: #D8D8D8;
     color: black;
+}
+
+.canvasAxis text {
+    fill: #858688;
+    font-size: 10px;
+    stroke: none;
+}
+
+.canvasAxis path {
+    stroke: #D8D8D8;
+    fill: none;
+    stroke-width: 1.6;
+}
+
+.canvasAxisIndex {
+    stroke: rgba(216, 216, 216, 0.5);
+    fill: none;
+    stroke-width: 1;
 }
