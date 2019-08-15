@@ -7,7 +7,7 @@ var templateRange = {
         'Sharing': 8
     },
     location: {
-        'Use': 100,
+        'Usa': 100,
         'China': 30,
         'Europe': 20,
         'Australia': 15,
@@ -28,10 +28,9 @@ var templateRange = {
         'Participants': 180000
     },
     join: { // 200000
-        'Could Video Device': 20000,
-        'On-Premise Video Device': 24000,
-        'Teams': 35000,
-        'Webex Meeting Client': 180000
+        'Video Device': 24000,
+        'Webex Teams': 35000,
+        'Webex Meeting': 180000
     },
     videoUsage: { // 200000
         'Meetings Client Video Participants': 50000,
@@ -205,16 +204,102 @@ var sum = function (data) {
     return r;
 };
 
+var cardData = [{
+    title: 'Total Meetings',
+    sum: '13K',
+    arrow: 'up',
+    increase: 10,
+    percentage: 10
+}, {
+    title: 'Total Meeting Minutes',
+    sum: '109K',
+    arrow: 'up',
+    increase: 10,
+    percentage: 10
+}, {
+    title: 'Active Hosts',
+    sum: '8.9K',
+    arrow: 'up',
+    increase: 13,
+    percentage: 10
+}, {
+    title: 'Active Participants',
+    sum: '1.5K',
+    arrow: 'down',
+    increase: 3,
+    percentage: 10
+}, {
+    title: 'International Meetings',
+    sum: '2.6K',
+    arrow: 'up',
+    increase: 7,
+    percentage: 10
+}, {
+    title: 'Service Up Time %',
+    sum: '92.5%',
+    arrow: 'down',
+    increase: 10,
+    percentage: 10
+}];
+var _c = function(c1,c2,c3){
+    return {
+        c1:c1,
+        c2:c2,
+        c3:c3
+    }
+};
+var GenerateTableData = function (top10, t, range1, range2){
+    var r1 =  range1 || [400,600],
+        r2 =range2 || [20000, 40000],
+        arr = [];
+    arr.push(_c(t[0], t[1], t[2]));
+    for(var i in top10){
+        arr.push(_c(top10[i], randomHelp.apply(this,r1), randomHelp.apply(this,r2)));
+    }
+    arr.sort(function(d1,d2){
+        return d2.c3 - d1.c3;
+    });
+    return arr;
+};
+var DTABLE = [
+    GenerateTableData(['Town Hall','Our People Talk', 'Branding Share-out','Business Policies','Quarterly Update Marketing','CFC FY19 Meeting','Earnings Report FY19','All Hands Management','Board and Partner Committee','Partner Meeting'],
+        ['Meeting Name','# of Participants','Meeting Minutes']),
+    GenerateTableData(['henylee','mariaaven','lauraforn','ericma','andylaws','tofuwu','mochawu','stevenadam','marywang','charlieanson'],
+        ['User','# of Meetings','# of Meetings'],[200,300]),
+    GenerateTableData(['San Jose, CA','San Francisco, CA','Richardson, TX','Seattle, WA','Bellevue, WA','Newark, NJ','Los Angeles, CA','San Diego, CA','Austin, TX','New York, NJ'],
+        ['Location','# of Meetings','# of Meetings'],[200,300]) 
+];
+
+
 var DATA = generate(4, 15, 5, 15);
 var MData = filerMonth(DATA);
 var WData = filerWeek(DATA);
 window.RAWDATA = {
-    day: DATA,
-    month: MData,
-    week: WData,
-    daySum: sum(DATA),
-    monthSum: sum(MData),
-    weekSum: sum(WData),
+    day: {
+        data: DATA,
+        sum: sum(DATA),
+        unit: 1
+    },
+    week: {
+        data: WData,
+        sum: sum(WData),
+        unit: 7
+    },
+    month: {
+        data: MData,
+        sum: sum(MData),
+        unit: 31
+    },
+    // daySum: sum(DATA), // sum for pie chart
+    // monthSum: sum(MData),
+    ///weekSum: sum(WData),
     templateRange: templateRange,
-    hash: hashStructor()
+    hash: hashStructor(),
+    card: cardData,
+    selection: { //$s
+        dataUnit: ['day', 'week', 'month'],
+        board1: ['meetings', 'minutes'],
+        board2: ['role', 'join', 'videoUsage']
+    },
+    DTABLE: DTABLE
 };

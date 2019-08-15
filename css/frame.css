@@ -229,7 +229,7 @@ h6 {
     text-indent: 32px;
     color: #000000;
     font-size: 20px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    position: relative;
 }
 
 .date_container {
@@ -462,7 +462,7 @@ h6 {
 
 .board_pie_icon {
     display: block;
-    width: 20px; 
+    width: 20px;
     height: 20px;
     position: absolute;
     bottom: 15px;
@@ -564,4 +564,69 @@ h6 {
     stroke: rgba(216, 216, 216, 0.5);
     fill: none;
     stroke-width: 1;
+}
+
+.navigation {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    min-width: 500px;
+    display: flex;
+    flex-direction: row;
+    height: 54px;
+}
+
+.navigation a {
+    display: block;
+    flex: none;
+    text-decoration: none;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    color: #666666;
+    font-size: 14px;
+    padding: 0 12px;
+    cursor: pointer;
+    text-indent: 0px;
+}
+
+.navigation a:hover, .navigation .current {
+    color: #00A0D1;
+    border-bottom: 4px solid #00A0D1;
+}
+
+.table {
+    list-style: none;
+    margin-top: 60px;
+}
+
+.table li {
+    height: 24px;
+    line-height: 24px;
+    display: flex;
+    flex-direction: row;
+}
+
+.table>li>a {
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    font-size: 12px;
+    color: #171B1F;
+    display: block;
+    width:105px;
+    flex: none;
+}
+
+.table>li>a:first-child{
+    flex: 1;
+    text-indent: 16px;
+    text-align: left;
+}
+
+.table .thead{
+    list-style: none;
+    height: 28px;
+    line-height: 28px;
+    border-bottom: rgba(0,0,0,0.08) 1px solid;
 }

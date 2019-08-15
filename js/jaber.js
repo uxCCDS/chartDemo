@@ -376,7 +376,7 @@ var gArc = function (bc, board, cStart) {
         return val;
     };
 
-    var distince = 12;
+    var distince = 15;
     var getLineX = function (i, plus, padding, len) {
         var pos = arc.centroidRelative(i, { r: distince });
         return pos.x > pos.x0 ?
@@ -418,7 +418,7 @@ var gArc = function (bc, board, cStart) {
     var text = board.text(bc.Selection, {
         generator: {
             x: function (d, i) {
-                return getX(i, -4);
+                return getX(i);
             },
             y: function (d, i) {
                 return getY(i);
@@ -429,7 +429,7 @@ var gArc = function (bc, board, cStart) {
         },
         modify: {
             style: {
-                'font-size': '11px',
+                'font-size': '12px',
                 'fill': '#666666',
                 'text-anchor': function (d, i) {
                     return getTextAligan(i);
@@ -441,10 +441,10 @@ var gArc = function (bc, board, cStart) {
     var text2 = board.text(bc.Selection, {
         generator: {
             x: function (d, i) {
-                return getX(i, -4);
+                return getX(i);
             },
             y: function (d, i) {
-                return getY(i, 12);
+                return getY(i, 16);
             },
             text: function (d, i) {
                 return bc.percentage(i, 'value');
@@ -452,7 +452,7 @@ var gArc = function (bc, board, cStart) {
         },
         modify: {
             style: {
-                'font-size': '11px',
+                'font-size': '12px',
                 'fill': '#666666',
                 'text-anchor': function (d, i) {
                     return getTextAligan(i);
@@ -464,7 +464,7 @@ var gArc = function (bc, board, cStart) {
     var rect = board.rect(bc.Selection, {
         generator: {
             x: function (d, i) {
-                return getLineX(i, -4, 4, 6);
+                return getLineX(i, 0, 4, 6);
             },
             y: function (d, i) {
                 return getY(i, -4);
@@ -510,9 +510,9 @@ var newBoard2 = function (boardID, boardConfig, selections, selectID) {
 };
 
 var newPies = function (id, selection) {
-    newPie('#board_pie1', 'join');
+    newPie('#board_pie1', 'activity');
     newPie('#board_pie2', 'location');
-    newPie('#board_pie3', 'activity');
+    newPie('#board_pie3', 'role');
 };
 
 var newPie = function (id, selection) {
@@ -523,17 +523,10 @@ var newPie = function (id, selection) {
 };
 
 var newArc = function () {
-    var b = new BD('#board_pie4', BoardConfig.side, 'role', 'sum');
+    var b = new BD('#board_pie4', BoardConfig.side, 'join', 'sum');
     b.onload(gArc2);
     b.create();
     b.show($d[$c.val('dataUnit')].sum);
-};
-
-var gTable = function () {
-    var _t = document.getElementById('tableline').value;
-    for(var i in RAWDATA.DTABLE){
-       new $Render.Table('table'+i, _t, RAWDATA.DTABLE[i]); 
-    }
 };
 
 window.onload = function () {
@@ -544,5 +537,4 @@ window.onload = function () {
     newPies();
     newArc();
     $Render.bindTab();
-    gTable();
 };

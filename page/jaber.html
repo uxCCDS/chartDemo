@@ -15,7 +15,7 @@
         <script type="text/javascript" src='../ts/momentum-ui-chart-min.js'></script>
         <script type="text/javascript" src='../js/dataGenerate.js' ></script>
         <script type="text/javascript" src='../js/render.js'></script>
-		<script type="text/javascript" src='../js/webex.js'></script>
+		<script type="text/javascript" src='../js/jaber.js'></script>
 	</head>
 	<body>
         <textarea id='template_card' class='hidden'>
@@ -26,11 +26,6 @@
                 <h1>$sum$<span class='$arrow$'>$increase$%<i></i></span></h1>
                 <p>$percentage$% of total users</p>
             </div>
-        </textarea>
-        <textarea id='tableline' class='hidden'>
-            <a>$c1$</a>
-            <a>$c2$</a>
-            <a>$c3$</a>
         </textarea>
 		<div class='contain'>
 			<div class='contain_l'>
@@ -48,10 +43,10 @@
             <div class='contain_r'>
                 <div class='top_titile'>Analytics
                     <div class='navigation'>
-                        <a class='current'>Meetings</a>
+                        <a href="webex.html">Meetings</a>
                         <a>Messaging</a>
                         <a>Calling</a>
-                        <a href="jaber.html">Jabber</a>
+                        <a class='current'>Jabber</a>
                         <a>Devices</a>
                         <a>Video Mesh</a>
                     </div>
@@ -66,12 +61,14 @@
                         </div>    
                         <div class='card_container'>
                             <div class='card_container_display' id='card_container_display'></div>
-                            <div class='card_container_add'></div>
                         </div> 
                         <div class='tab_header'>
-                            <a class='current'>Engagement</a>
-                            <a>Audio</a>
-                            <a>Quility</a>
+                            <a class='current'>Total</a>
+                            <a>IM</a>
+                            <a>Calls</a>
+                            <a>Desktop Share</a>
+                            <a>Contacts</a>
+                            <a>Login</a>
                         </div>
                         <div class='board_panel'>
                             <div class='board_bars'>
@@ -97,43 +94,6 @@
                                 <div class='board_pie' id='board_pie2'><i class='board_pie_icon'></i></div>
                                 <div class='board_pie' id='board_pie3'><i class='board_pie_icon'></i></div>
                                 <div class='board_pie lastBoard' id='board_pie4'><i class='board_pie_icon'></i></div>
-                            </div>
-                        </div>
-                        <div class='board_panel_bottom'>
-                            <div class='board_pie_card'>
-                                <select class='innerSelectorLong'>
-                                    <option selected="selected"  value='0'>Top 10 Meetings by Meeting Size</option>
-                                    <option value='1'>Top 10 Meetings</option>
-                                    <option value='2'>Top 10 Video Meetings</option> 
-                                    <option value='3'>Bottom 10 Meetings by meeting size</option>
-                                    <option value='4'>Bottom 10 Video Meetings</option>
-                                </select>
-                                <ul class='table' id='table0'></ul>
-                            </div>
-                            <div class='board_pie_card'>
-                                <select class='innerSelectorLong'>
-                                    <option selected="selected"  value='0'>Top 10 Meetings by Meeting Size</option>
-                                    <option value='1'>Top 10 Hosts</option>
-                                    <option value='2'>Top 10 participants</option>
-                                    <option value='3'>Top 10 video users</option>
-                                    <option value='4'>Bottom 10 hosts</option>
-                                </select>
-                                <ul class='table' id='table1'></ul>
-                            </div>
-                            <div class='board_pie_card lastBoard'>
-                                <select class='innerSelectorLong'>
-                                    <option selected="selected"  value='0'>Top 10 Meetings by Meeting Size</option>
-                                    <option value='1'>Top 10 Locations by # of the meetings</option>
-                                    <option value='2'>Top 10 Meeting location by # of city</option>
-                                    <option value='3'>Top 10 Meeting location by # of country</option>
-                                    <option value='4'>Top 10 Meeting location by # of region</option>
-                                    <option value='5'>Most used video locations by # of city</option>
-                                    <option value='6'>Most used video locations by # of country</option>
-                                    <option value='7'>Most used video locations by # of region</option>
-                                    <option value='8'>Most used video locations by group</option>
-                                    <option value='9'>Bottom 10 Video Usage by group</option>
-                                </select>
-                                <ul class='table' id='table2'></ul>
                             </div>
                         </div>
                     </div>
