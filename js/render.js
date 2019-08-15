@@ -118,6 +118,9 @@ var BD = function(id, config, selection, key2, ifTranstion){
     this.isCreated = false;
     this.ifRender = false;
     this.Key2 = typeof key2 === 'string' ? key2 : 'data';
+    if(/\#$/.test(location.href)){
+        ifTranstion = true;
+    }
     this.RenderFunc = ifTranstion ? 'transition' : 'render';
     this.AxisConfig = new AxisConfig(selection,70, 320, 800, 300, 50);
     this._loads=[];
