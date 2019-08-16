@@ -118,10 +118,7 @@ var BD = function(id, config, selection, key2, ifTranstion){
     this.isCreated = false;
     this.ifRender = false;
     this.Key2 = typeof key2 === 'string' ? key2 : 'data';
-    if(/\#$/.test(location.href)){
-        ifTranstion = true;
-    }
-    this.RenderFunc = ifTranstion ? 'transition' : 'render';
+    this.IfTranstion = /\#$/.test(location.href) ;
     this.AxisConfig = new AxisConfig(selection,70, 320, 800, 300, 50);
     this._loads=[];
     this.Pformat2 = d3.format(".2~f");
@@ -158,8 +155,14 @@ BD.prototype = {
     },
     render: function(data){
         if(this.ifRender){
-            // console.log(data, this.RenderFunc);
-            this.Board[this.RenderFunc](data);
+            if(this.IfTranstion){
+                this.Board.transition({
+                    duration: 600,
+                    ease: d3.easeCubicOut
+                  }, data);
+            }else{
+                this.Board.render(data);
+            }
         }
     },
     show: function(data) {
@@ -169,7 +172,6 @@ BD.prototype = {
     },
     create: function() {
         if(!this.isCreated){
-            // console.log($d[$c.val('dataUnit')].data);
             this.Board = new MomentumChart.Board(this.Id, this.Config,$d[$c.val('dataUnit')][this.Key2]);
             this.fire();
             this.bind();
@@ -235,7 +237,6 @@ AxisConfig.prototype = {
                 targs.push(i);
             }
         }
-        
         return {
             generator: {
                 range: me.realRangeX(),

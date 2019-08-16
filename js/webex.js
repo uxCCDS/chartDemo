@@ -28,7 +28,8 @@ var gAxis = function (bd, board) {
     //confX.dataConvert = bc.AxisConfig.gx;
     //confY.dataConvert = bc.AxisConfig.gy;
     // 800 * 300 
-    board.axis('x', confX, '').IsStatic = false;
+    var bd = board.axis('x', confX, '');
+    bd.IsStatic = false;
     board.axis('y', confY, '').IsStatic = false;
 };
 var gLine = function (bc, board) {
