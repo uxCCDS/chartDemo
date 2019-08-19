@@ -544,7 +544,7 @@ var newBoard2 = function (boardID, boardConfig, selections, selectID) {
     for (var i in keys) {
         b = new BD(boardID, boardConfig, keys[i]);
         b.onload(gAxis);
-        b.onload(gRect, 4);
+        b.onload(gRect, 5);
         arr.push(b);
     }
     s1 = new BdSwitch(arr, selections, selectID);
