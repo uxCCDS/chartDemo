@@ -125,7 +125,7 @@ var gLine = function (bc, board) {
     }
 };
 
-var gRect = function (bc, board) {
+var gRect = function (bc, board, cStart) {
     var key3 = bc.Selection,
         nodes = RAWDATA.templateRange[key3],
         x0 = bc.AxisConfig.rangeX()[0],
@@ -223,7 +223,7 @@ var gRect = function (bc, board) {
                 }
             });
 
-        })(name, COLORS[index].toString(), countLen, index);
+        })(name, COLORS[cStart+index].toString(), countLen, index);
         countLen += name.length * 8;
         index++;
 
@@ -544,7 +544,7 @@ var newBoard2 = function (boardID, boardConfig, selections, selectID) {
     for (var i in keys) {
         b = new BD(boardID, boardConfig, keys[i]);
         b.onload(gAxis);
-        b.onload(gRect);
+        b.onload(gRect, 4);
         arr.push(b);
     }
     s1 = new BdSwitch(arr, selections, selectID);
@@ -552,14 +552,14 @@ var newBoard2 = function (boardID, boardConfig, selections, selectID) {
 };
 
 var newPies = function (id, selection) {
-    newPie('#board_pie1', 'join');
-    newPie('#board_pie2', 'location');
-    newPie('#board_pie3', 'activity');
+    newPie('#board_pie1', 'join', 0);
+    newPie('#board_pie2', 'location', 3);
+    newPie('#board_pie3', 'activity', 7);
 };
 
-var newPie = function (id, selection) {
+var newPie = function (id, selection, cStart) {
     var b = new BD(id, BoardConfig.side, selection, 'sum');
-    b.onload(gArc);
+    b.onload(gArc, cStart);
     b.create();
     b.show($d[$c.val('dataUnit')].sum);
 };

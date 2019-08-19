@@ -149,12 +149,15 @@ BD.prototype = {
 
         return (this.Pformat2(data[i][p] / sum) * 100 >> 0) + '%';
     },
-    onload: function (func) {
-        this._loads.push(func);
+    onload: function (func, args) {
+        this._loads.push({
+            fn: func,
+            arg: args
+        });
     },
     fire: function () {
         for (var n in this._loads) {
-            this._loads[n](this, this.Board);
+            this._loads[n].fn(this, this.Board, this._loads[n].arg);
         }
     },
     bind: function () {
