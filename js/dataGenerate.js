@@ -41,13 +41,30 @@ var templateRange = {
 
 var monthDay = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
-var generate = function (month1, day1, month2, day2) {
-    var ds, de, arr = [];
+var countAll = function(month1, day1, month2, day2) {
+    var ds, de,
+        sum = 0;
     for (var i = month1, l = month2 + 1; i < l; i++) {
         ds = i === month1 ? day1 : 1;
         de = i === month2 ? day2 : monthDay[i - 1];
         for (var j = ds; j <= de; j++) {
-            arr.push(generateData(i, j));
+            sum ++ ;
+        }
+    }
+    return sum;
+};
+
+var generate = function (month1, day1, month2, day2, randomFunc) {
+    var ds, de, arr = [],
+        index = 0,
+        sum = countAll(month1, day1, month2, day2),
+        func = typeof randomFunc === 'function' ? randomFunc : randomNode;
+    for (var i = month1, l = month2 + 1; i < l; i++) {
+        ds = i === month1 ? day1 : 1;
+        de = i === month2 ? day2 : monthDay[i - 1];
+        for (var j = ds; j <= de; j++) {
+            arr.push(generateData(i, j, func, index , sum));
+            index++;
         }
     }
     return arr;
@@ -69,18 +86,42 @@ var randomData = function (max, month, day) {
     return (xBase + xRate) >> 0;
 };
 
-var generateData = function (month, day) {
+var getPercentage = function(index, total) {
+    if(total<5) {
+        return 0.5;
+    }
+};
+
+var randomDataPencentage = function(node, month, day, index, total) {
+    var p = {},
+        max = - Infinity;
+    for(var n in node) {
+        max = Math.max(max, node[n]);
+    }
+    max = max * 0.5;
+    for(var n in node) {
+        p[n] = max;
+    }
+    return p;
+};
+
+var randomNode =  function(node, month, day) {
+    var p = {};
+    for(var n in node) {
+        p[n] = randomData(node[n], month, day);
+    }
+    return p;
+};
+
+var generateData = function (month, day, randomFunc, index, total) {
     var o = {
         m: month,
         d: day,
         tickeName: fd(month) + '/' + fd(day)
-    }, node, p, arr;
+    }, node, p;
     for (var name in templateRange) {
         node = templateRange[name];
-        p = {}
-        for (var n in node) {
-            p[n] = randomData(node[n], month, day);
-        }
+        p = randomFunc(node, month, day, index, total);
         o[name] = p;
     }
     return o;
@@ -156,7 +197,7 @@ var filerWeek = function (data) {
         d = data[i];
         if (i % 7 === 0) {
             wIndex++;
-            ret[wIndex] = emptyData();
+            ret[wIndex] = emptyData(); //emptyData
             ret[wIndex].tickeName = d.tickeName;
         }
         add(ret[wIndex], d);
@@ -179,7 +220,6 @@ var toArrayName = function (obj) {
     return arr;
 };
 
-
 var sum = function (data) {
     var o = {},
         d,
@@ -195,6 +235,30 @@ var sum = function (data) {
         for (var i1 in o) {
             for (var j1 in o[i1]) {
                 o[i1][j1] += d[i1][j1];
+            }
+        }
+    }
+    for (var i in o) {
+        r[i] = toArrayName(o[i]);
+    }
+    return r;
+};
+
+var sum0 = function (data) {
+    var o = {},
+        d,
+        r = {};
+    for (var i in templateRange) {
+        o[i] = {};
+        for (var j in templateRange[i]) {
+            o[i][j] = 0;
+        }
+    }
+    for (var index = 0, l = data.length; index < l; index++) {
+        d = data[index];
+        for (var i1 in o) {
+            for (var j1 in o[i1]) {
+                o[i1][j1] += 0;
             }
         }
     }
@@ -270,24 +334,35 @@ var DTABLE = [
         ['Location','# of Meetings','# of Meetings'],[200,300]) 
 ];
 
-
 var DATA = generate(4, 15, 5, 15);
+var PDATA = generate(4, 15, 5, 15, randomDataPencentage);
+
 var MData = filerMonth(DATA);
 var WData = filerWeek(DATA);
+
+var MDataP = filerMonth(PDATA);
+var WDataP = filerWeek(PDATA);
+
 window.RAWDATA = {
     day: {
         data: DATA,
+        preload: PDATA,
         sum: sum(DATA),
+        preloadSum: sum(PDATA),
         unit: 1
     },
     week: {
         data: WData,
+        preload: WDataP,
         sum: sum(WData),
+        preloadSum: sum(WDataP),
         unit: 7
     },
     month: {
         data: MData,
+        preload: MDataP,
         sum: sum(MData),
+        preloadSum: sum(MDataP),
         unit: 31
     },
     // daySum: sum(DATA), // sum for pie chart

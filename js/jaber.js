@@ -47,11 +47,9 @@ var gLine = function (bc, board) {
             board.line({
                 generator: {
                     x: function (d, i) {
-                        // console.log('****', bc.AxisConfig.scaleX()(i) >> 0, bc.AxisConfig.scaleY()(d[key3][name]) >> 0);
                         return bc.AxisConfig.scaleX()(i) >> 0;
                     },
                     y: function (d) {
-                        // console.log('---', d[key3][name], bc.AxisConfig.scaleY()(d[key3][name]));
                         return bc.AxisConfig.scaleY()(d[key3][name]) >> 0;
                     }
                 },
@@ -385,10 +383,10 @@ var gArc = function (bc, board, cStart) {
     }, getX = function (i, plus) {
         var pos = arc.centroidRelative(i, { r: distince }),
             rPlus = pos.x > pos.x0 ? 1 : -1;
-        return _forceRange(pos.x + (plus || 0) * rPlus, 0, w, 10);
+        return _forceRange(pos.x + (plus || 0) * rPlus, 0, w, 3);
     }, getY = function (i, plus) {
         var pos = arc.centroidRelative(i, { r: distince });
-        return _forceRange(pos.y + (plus || 0), 0, h, 10);
+        return _forceRange(pos.y + (plus || 0), 0, h, 3);
     }, getTextAligan = function (i) {
         var pos = arc.centroidRelative(i, { r: distince });
         //text-anchor

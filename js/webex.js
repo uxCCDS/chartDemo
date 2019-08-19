@@ -33,6 +33,7 @@ var gAxis = function (bd, board) {
     board.axis('y', confY, '').IsStatic = false;
 };
 var gLine = function (bc, board) {
+    bc.PreLoadName = 'preloadLine';
     var key3 = bc.Selection,
         nodes = RAWDATA.templateRange[key3],
         x0 = bc.AxisConfig.rangeX()[0],
@@ -45,7 +46,7 @@ var gLine = function (bc, board) {
                 stroke: color,
                 'stroke-width': 2
             };
-            board.line({
+            var lineMain = board.line({
                 generator: {
                     x: function (d, i) {
                         // console.log('****', bc.AxisConfig.scaleX()(i) >> 0, bc.AxisConfig.scaleY()(d[key3][name]) >> 0);
@@ -61,7 +62,7 @@ var gLine = function (bc, board) {
                 }
             });
 
-            board.line({
+            var lineTitle = board.line({
                 dataConvert: function (data) {
                     return [{
                         x: x0 + countLen,
@@ -82,6 +83,15 @@ var gLine = function (bc, board) {
                 modify: {
                     style: style
                 }
+            });
+
+            var _spl = {};
+            _spl[lineMain.Guid] = lineMain;
+            _spl[lineTitle.Guid] = lineTitle;
+
+            bc.PreLoadShapes.push({
+                shapes: _spl,
+                loader: 'preloadGradient'
             });
 
             board.text({
@@ -132,7 +142,7 @@ var gRect = function (bc, board) {
                     rx: 4,
                     ry: 4
                 };
-            board.rect({
+            var rectMain = board.rect({
                 generator: {
                     x: function (d, i) {
                         // console.log('****', bc.AxisConfig.scaleX()(i) >> 0, bc.AxisConfig.scaleY()(d[key3][name]) >> 0);
@@ -154,7 +164,7 @@ var gRect = function (bc, board) {
                 }
             });
 
-            board.rect({
+            var rectTitle = board.rect({
                 dataConvert: function (data) {
                     return [{
                         x: x0 + countLen + 50 * index,
@@ -178,6 +188,15 @@ var gRect = function (bc, board) {
                         ry: 6
                     }
                 }
+            });
+
+            var _spl = {};
+            _spl[rectMain.Guid] = rectMain;
+            _spl[rectTitle.Guid] = rectTitle;
+
+            bc.PreLoadShapes.push({
+                shapes: _spl,
+                loader: 'preloadGradient'
             });
 
             board.text({
@@ -332,6 +351,17 @@ var gArc2 = function (bc, board, cStart) {
             }
         }
     });
+
+    var _spl = {};
+    _spl[arc.Guid] = arc;
+
+    bc.PreLoadShapes.push({
+        shapes: _spl,
+        loader: 'preloadGradient'
+    });
+    bc.PreLoadData = bc.getPreloadDataSum();
+    bc.DelayItems.fill.push(text);
+    bc.DelayItems.fill.push(rect);
 }
 
 var gArc = function (bc, board, cStart) {
@@ -480,6 +510,17 @@ var gArc = function (bc, board, cStart) {
         }
     });
 
+    var _spl = {};
+    _spl[arc.Guid] = arc;
+
+    bc.PreLoadShapes.push({
+        shapes: _spl,
+        loader: 'preloadGradient'
+    });
+    bc.PreLoadData = bc.getPreloadDataSum();
+    bc.DelayItems.fill.push(text);
+    bc.DelayItems.fill.push(text2);
+    bc.DelayItems.fill.push(rect);
 };
 
 var newBoard1 = function (boardID, boardConfig, selections, selectID) {
@@ -532,8 +573,8 @@ var newArc = function () {
 
 var gTable = function () {
     var _t = document.getElementById('tableline').value;
-    for(var i in RAWDATA.DTABLE){
-       new $Render.Table('table'+i, _t, RAWDATA.DTABLE[i]); 
+    for (var i in RAWDATA.DTABLE) {
+        new $Render.Table('table' + i, _t, RAWDATA.DTABLE[i]);
     }
 };
 
