@@ -137,11 +137,8 @@ var gRect = function (bc, board, cStart) {
         (function (name, color, countLen, index) {
             var style = {
                 fill: color
-            },
-                attr = {
-                    rx: 4,
-                    ry: 4
-                };
+            };
+            var radius = [4, 4, 0, 0];
             var rectMain = board.rect({
                 generator: {
                     x: function (d, i) {
@@ -156,11 +153,12 @@ var gRect = function (bc, board, cStart) {
                         let step = $c.val('dataUnit') === 'day' ? 2 : 1;
                         return i % step === 0 ? y0 - bc.AxisConfig.scaleY()(d[key3][name]) : 0;
                     },
-                    w: 6
+                    w: 8,
+                    rx: radius,
+                    ry: radius
                 },
                 modify: {
-                    style: style,
-                    attr: attr
+                    style: style
                 }
             });
 
@@ -179,14 +177,12 @@ var gRect = function (bc, board, cStart) {
                         return d.y;
                     },
                     w: 24,
-                    h: 12
+                    h: 12,
+                    rx: 6,
+                    ry: 6
                 },
                 modify: {
-                    style: style,
-                    attr: {
-                        rx: 6,
-                        ry: 6
-                    }
+                    style: style
                 }
             });
 
@@ -224,7 +220,7 @@ var gRect = function (bc, board, cStart) {
             });
 
         })(name, COLORS[cStart+index].toString(), countLen, index);
-        countLen += name.length * 8;
+        countLen += name.length * 6;
         index++;
 
     }
@@ -244,8 +240,8 @@ var gArc2 = function (bc, board, cStart) {
         h = + config.height,
         x0 = w / 2,
         y0 = h / 2,
-        R = 80,
-        RLen = 13,
+        R = 43,
+        RLen = 8,
         RStep = RLen + 2;
     cStart = cStart || 0;
     var arc = board.arc(bc.Selection, {
@@ -303,7 +299,7 @@ var gArc2 = function (bc, board, cStart) {
         },
         generator: {
             x: 16,
-            y: 20,
+            y: 24,
             text: function (d) {
                 return d;
             }
@@ -311,8 +307,7 @@ var gArc2 = function (bc, board, cStart) {
         modify: {
             style: {
                 'font-size': '14px',
-                'fill': '#171B1F',
-                'text-transform': 'capitalize'
+                'fill': '#171B1F'
             }
         }
     });
@@ -375,8 +370,8 @@ var gArc = function (bc, board, cStart) {
         generator: {
             x: x0,
             y: y0,
-            innerRadius: 60,
-            outerRadius: 80,
+            innerRadius: 35,
+            outerRadius: 43,
             padAngle: Math.PI / 360 * 5,
             padRadius: 34
         },
@@ -432,7 +427,7 @@ var gArc = function (bc, board, cStart) {
         },
         generator: {
             x: 16,
-            y: 20,
+            y: 24,
             text: function (d) {
                 return d;
             }
@@ -440,19 +435,21 @@ var gArc = function (bc, board, cStart) {
         modify: {
             style: {
                 'font-size': '14px',
-                'fill': '#171B1F',
-                'text-transform': 'capitalize'
+                'fill': '#171B1F'
             }
         }
     });
 
+    var xPlus = 10,
+        yPlus = 0;
+
     var text = board.text(bc.Selection, {
         generator: {
             x: function (d, i) {
-                return getX(i, -4);
+                return getX(i, xPlus);
             },
             y: function (d, i) {
-                return getY(i);
+                return getY(i,yPlus);
             },
             text: function (d) {
                 return d.name;
@@ -472,10 +469,10 @@ var gArc = function (bc, board, cStart) {
     var text2 = board.text(bc.Selection, {
         generator: {
             x: function (d, i) {
-                return getX(i, -4);
+                return getX(i, xPlus);
             },
             y: function (d, i) {
-                return getY(i, 12);
+                return getY(i, yPlus + 12);
             },
             text: function (d, i) {
                 return bc.percentage(i, 'value');
@@ -495,10 +492,10 @@ var gArc = function (bc, board, cStart) {
     var rect = board.rect(bc.Selection, {
         generator: {
             x: function (d, i) {
-                return getLineX(i, -4, 4, 6);
+                return getLineX(i, xPlus, 4, 6);
             },
             y: function (d, i) {
-                return getY(i, -4);
+                return getY(i, yPlus - 4);
             },
             w: 6,
             h: 1
@@ -552,9 +549,9 @@ var newBoard2 = function (boardID, boardConfig, selections, selectID) {
 };
 
 var newPies = function (id, selection) {
-    newPie('#board_pie1', 'join', 0);
-    newPie('#board_pie2', 'location', 3);
-    newPie('#board_pie3', 'activity', 7);
+    newPie('#board_pie1', 'Join Method', 0);
+    newPie('#board_pie2', 'Usage by location', 3);
+    newPie('#board_pie3', 'Usage by activity', 7);
 };
 
 var newPie = function (id, selection, cStart) {
@@ -565,7 +562,7 @@ var newPie = function (id, selection, cStart) {
 };
 
 var newArc = function () {
-    var b = new BD('#board_pie4', BoardConfig.side, 'role', 'sum');
+    var b = new BD('#board_pie4', BoardConfig.side, 'Role', 'sum');
     b.onload(gArc2);
     b.create();
     b.show($d[$c.val('dataUnit')].sum);

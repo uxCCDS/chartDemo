@@ -1,12 +1,12 @@
 var templateRange = {
     // day: 4,
     // month: 5,
-    activity: {
+    'Usage by activity': {
         'Video': 4,
         'Recording': 6,
         'Sharing': 8
     },
-    location: {
+    'Usage by location': {
         'Usa': 100,
         'China': 30,
         'Europe': 20,
@@ -23,11 +23,11 @@ var templateRange = {
         'Teams Client and Device Video': 3000000,
         'All Meetings': 7500000
     },
-    role: { // 200000
+    Role: { // 200000
         'Host': 20000,
         'Participants': 180000
     },
-    join: { // 200000
+    'Join Method': { // 200000
         'Video Device': 24000,
         'Webex Teams': 35000,
         'Webex Meeting': 180000
@@ -275,34 +275,28 @@ var cardData = [{
     increase: 10,
     percentage: 10
 }, {
-    title: 'Total Meeting Minutes',
+    title: 'Total Unique Hosts',
     sum: '109K',
     arrow: 'up',
     increase: 10,
     percentage: 10
 }, {
-    title: 'Active Hosts',
+    title: 'Total Meeting Minutes',
     sum: '8.9K',
     arrow: 'up',
     increase: 13,
     percentage: 10
 }, {
-    title: 'Active Participants',
+    title: 'Total Participants',
     sum: '1.5K',
     arrow: 'down',
     increase: 3,
     percentage: 10
 }, {
-    title: 'International Meetings',
+    title: 'Total Video Meetings',
     sum: '2.6K',
     arrow: 'up',
     increase: 7,
-    percentage: 10
-}, {
-    title: 'Service Up Time %',
-    sum: '92.5%',
-    arrow: 'down',
-    increase: 10,
     percentage: 10
 }];
 var _c = function(c1,c2,c3){
@@ -374,7 +368,7 @@ window.RAWDATA = {
     selection: { //$s
         dataUnit: ['day', 'week', 'month'],
         board1: ['meetings', 'minutes'],
-        board2: ['role', 'join', 'videoUsage']
+        board2: ['Role', 'Join Method', 'videoUsage']
     },
     DTABLE: DTABLE
 };

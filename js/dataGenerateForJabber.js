@@ -1,41 +1,30 @@
 var templateRange = {
     // day: 4,
     // month: 5,
-    activity: {
-        'Video': 10,
-        'Recording': 6,
-        'Sharing': 8
+    'Usage by activity': {
+        'Audio Calls': 900,
+        'Messages': 400,
+        'Video Calls': 700
     },
-    location: {
-        'Usa': 80,
-        'China': 10,
-        'Europe': 40,
-        'Australia': 15,
-        'Other': 10
+    'Usage by platform': {
+        'iOS': 1000,
+        'Win': 330,
+        'Mac': 670
     },
-    meetings: { // 50000
-        'Meetings Client Video': 30000,
-        'Teams Client and Device Video': 26000,
-        'All Meetings': 30000
+    'Usage by Client version': {
+        'Jabber 4.1': 1000,
+        'Jabber 4.0': 260,
+        'Jabber 3.9': 740
     },
-    minutes: { // 10000000 0.75
-        'Meetings Client Video': 4000000,
-        'Teams Client and Device Video': 3000000,
-        'All Meetings': 6500000
+    'Active user usage': {
+        'Active user': 16,
+        'Usage': 75
     },
-    role: { // 200000
-        'Host': 10000,
-        'Participants': 190000
+    'Total usage': {
+        All: 2000
     },
-    join: { // 200000
-        'Video Device': 34000,
-        'Webex Teams': 25000,
-        'Webex Meeting': 180000
-    },
-    videoUsage: { // 200000
-        'Meetings Client Video Participants': 600000,
-        'Teams Client and Device Video Participants': 100000,
-        'Total Participants': 180000
+    'Total daily active users': {
+        Users: 100
     }
 };
 
@@ -205,31 +194,31 @@ var sum = function (data) {
 };
 
 var cardData = [{
-    title: 'Total Meetings',
+    title: 'Active Users',
+    sum: '0.2K',
+    arrow: 'up',
+    increase: 10,
+    percentage: 10
+}, {
+    title: 'Total Jabber Usages',
     sum: '13K',
     arrow: 'up',
     increase: 10,
     percentage: 10
 }, {
-    title: 'Total Meeting Minutes',
-    sum: '109K',
-    arrow: 'up',
-    increase: 10,
-    percentage: 10
-}, {
-    title: 'Active Hosts',
+    title: 'Total Messages',
     sum: '8.9K',
     arrow: 'up',
     increase: 13,
     percentage: 10
 }, {
-    title: 'Active Participants',
+    title: 'Total Video Calls',
     sum: '1.5K',
     arrow: 'down',
     increase: 3,
     percentage: 10
 }, {
-    title: 'International Meetings',
+    title: 'Total Audio Calls',
     sum: '2.6K',
     arrow: 'up',
     increase: 7,
@@ -298,8 +287,8 @@ window.RAWDATA = {
     card: cardData,
     selection: { //$s
         dataUnit: ['day', 'week', 'month'],
-        board1: ['meetings', 'minutes'],
-        board2: ['role', 'join', 'videoUsage']
+        board1: ['Total usage', 'Usage by activity'],
+        board2: ['Total daily active users', 'Usage by platform']
     },
     DTABLE: DTABLE
 };

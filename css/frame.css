@@ -275,6 +275,8 @@ h6 {
     flex-direction: row;
 }
 
+.card_container_display .card:first-child{margin-left: 0px;};
+
 .card_container_add {
     height: 110px;
     width: 30px;
@@ -292,8 +294,8 @@ h6 {
     border-radius: 4px;
     border: 1px solid #D2D5D6;
     position: relative;
-    flex: none;
-    margin-right: 18px;
+    flex: 1;
+    margin-left: 18px;
 }
 
 .card:hover .card_edit,
