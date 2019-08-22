@@ -273,31 +273,31 @@ var cardData = [{
     sum: '13K',
     arrow: 'up',
     increase: 10,
-    percentage: 10
+    percentage: 'average 1.46 meetings / unique host'
 }, {
     title: 'Total Unique Hosts',
     sum: '109K',
     arrow: 'up',
     increase: 10,
-    percentage: 10
+    percentage: '16% of total users'
 }, {
     title: 'Total Meeting Minutes',
     sum: '8.9K',
     arrow: 'up',
     increase: 13,
-    percentage: 10
+    percentage: 'average 58 mins / meeting'
 }, {
     title: 'Total Participants',
     sum: '1.5K',
     arrow: 'down',
     increase: 3,
-    percentage: 10
+    percentage: 'average 2.5 participants / meeting'
 }, {
     title: 'Total Video Meetings',
     sum: '2.6K',
     arrow: 'up',
     increase: 7,
-    percentage: 10
+    percentage: '19% of all meetings'
 }];
 var _c = function(c1,c2,c3){
     return {

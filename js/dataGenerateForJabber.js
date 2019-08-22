@@ -198,37 +198,37 @@ var cardData = [{
     sum: '0.2K',
     arrow: 'up',
     increase: 10,
-    percentage: 10
+    percentage: '10% of total users'
 }, {
     title: 'Total Jabber Usages',
     sum: '13K',
     arrow: 'up',
     increase: 10,
-    percentage: 10
+    percentage: '65 usgs per actice user'
 }, {
     title: 'Total Messages',
     sum: '8.9K',
     arrow: 'up',
     increase: 13,
-    percentage: 10
+    percentage: '44.5 msgs per active user'
 }, {
     title: 'Total Video Calls',
     sum: '1.5K',
     arrow: 'down',
     increase: 3,
-    percentage: 10
+    percentage: '7.5 calls per active user'
 }, {
     title: 'Total Audio Calls',
     sum: '2.6K',
     arrow: 'up',
     increase: 7,
-    percentage: 10
+    percentage: '14 calls per active user'
 }, {
     title: 'Service Up Time %',
     sum: '92.5%',
     arrow: 'down',
     increase: 10,
-    percentage: 10
+    percentage: '12 mins downtime'
 }];
 var _c = function(c1,c2,c3){
     return {
