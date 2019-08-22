@@ -632,3 +632,7 @@ h6 {
     line-height: 28px;
     border-bottom: rgba(0,0,0,0.08) 1px solid;
 }
+
+.loadContainer path{
+    transform-origin: 50% 50%;
+}
