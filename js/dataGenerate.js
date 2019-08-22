@@ -41,14 +41,14 @@ var templateRange = {
 
 var monthDay = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
-var countAll = function(month1, day1, month2, day2) {
+var countAll = function (month1, day1, month2, day2) {
     var ds, de,
         sum = 0;
     for (var i = month1, l = month2 + 1; i < l; i++) {
         ds = i === month1 ? day1 : 1;
         de = i === month2 ? day2 : monthDay[i - 1];
         for (var j = ds; j <= de; j++) {
-            sum ++ ;
+            sum++;
         }
     }
     return sum;
@@ -63,7 +63,7 @@ var generate = function (month1, day1, month2, day2, randomFunc) {
         ds = i === month1 ? day1 : 1;
         de = i === month2 ? day2 : monthDay[i - 1];
         for (var j = ds; j <= de; j++) {
-            arr.push(generateData(i, j, func, index , sum));
+            arr.push(generateData(i, j, func, index, sum));
             index++;
         }
     }
@@ -86,28 +86,28 @@ var randomData = function (max, month, day) {
     return (xBase + xRate) >> 0;
 };
 
-var getPercentage = function(index, total) {
-    if(total<5) {
+var getPercentage = function (index, total) {
+    if (total < 5) {
         return 0.5;
     }
 };
 
-var randomDataPencentage = function(node, month, day, index, total) {
+var randomDataPencentage = function (node, month, day, index, total) {
     var p = {},
         max = - Infinity;
-    for(var n in node) {
+    for (var n in node) {
         max = Math.max(max, node[n]);
     }
     max = max * 0.5;
-    for(var n in node) {
-        p[n] = max;
+    for (var n in node) {
+        p[n] = randomHelp(max * 0.6, max * 1.2);
     }
     return p;
 };
 
-var randomNode =  function(node, month, day) {
+var randomNode = function (node, month, day) {
     var p = {};
-    for(var n in node) {
+    for (var n in node) {
         p[n] = randomData(node[n], month, day);
     }
     return p;
@@ -299,33 +299,33 @@ var cardData = [{
     increase: 7,
     percentage: '19% of all meetings'
 }];
-var _c = function(c1,c2,c3){
+var _c = function (c1, c2, c3) {
     return {
-        c1:c1,
-        c2:c2,
-        c3:c3
+        c1: c1,
+        c2: c2,
+        c3: c3
     }
 };
-var GenerateTableData = function (top10, t, range1, range2){
-    var r1 =  range1 || [400,600],
-        r2 =range2 || [20000, 40000],
+var GenerateTableData = function (top10, t, range1, range2) {
+    var r1 = range1 || [400, 600],
+        r2 = range2 || [20000, 40000],
         arr = [];
     arr.push(_c(t[0], t[1], t[2]));
-    for(var i in top10){
-        arr.push(_c(top10[i], randomHelp.apply(this,r1), randomHelp.apply(this,r2)));
+    for (var i in top10) {
+        arr.push(_c(top10[i], randomHelp.apply(this, r1), randomHelp.apply(this, r2)));
     }
-    arr.sort(function(d1,d2){
+    arr.sort(function (d1, d2) {
         return d2.c3 - d1.c3;
     });
     return arr;
 };
 var DTABLE = [
-    GenerateTableData(['Town Hall','Our People Talk', 'Branding Share-out','Business Policies','Quarterly Update Marketing','CFC FY19 Meeting','Earnings Report FY19','All Hands Management','Board and Partner Committee','Partner Meeting'],
-        ['Meeting Name','# of Participants','Meeting Minutes']),
-    GenerateTableData(['henylee','mariaaven','lauraforn','ericma','andylaws','tofuwu','mochawu','stevenadam','marywang','charlieanson'],
-        ['User','# of Meetings','# of Meetings'],[200,300]),
-    GenerateTableData(['San Jose, CA','San Francisco, CA','Richardson, TX','Seattle, WA','Bellevue, WA','Newark, NJ','Los Angeles, CA','San Diego, CA','Austin, TX','New York, NJ'],
-        ['Location','# of Meetings','# of Meetings'],[200,300]) 
+    GenerateTableData(['Town Hall', 'Our People Talk', 'Branding Share-out', 'Business Policies', 'Quarterly Update Marketing', 'CFC FY19 Meeting', 'Earnings Report FY19', 'All Hands Management', 'Board and Partner Committee', 'Partner Meeting'],
+        ['Meeting Name', '# of Participants', 'Meeting Minutes']),
+    GenerateTableData(['henylee', 'mariaaven', 'lauraforn', 'ericma', 'andylaws', 'tofuwu', 'mochawu', 'stevenadam', 'marywang', 'charlieanson'],
+        ['User', '# of Meetings', '# of Meetings'], [200, 300]),
+    GenerateTableData(['San Jose, CA', 'San Francisco, CA', 'Richardson, TX', 'Seattle, WA', 'Bellevue, WA', 'Newark, NJ', 'Los Angeles, CA', 'San Diego, CA', 'Austin, TX', 'New York, NJ'],
+        ['Location', '# of Meetings', '# of Meetings'], [200, 300])
 ];
 
 var DATA = generate(4, 15, 5, 15);
