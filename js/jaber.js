@@ -125,11 +125,11 @@ var gRect = function (bc, board) {
             var style = {
                 fill: color
             };
-            var radius = [4, 4, 0, 0];
+            var radius = [6, 6, 0, 0];
             board.rect({
                 generator: {
                     x: function (d, i) {
-                        return bc.AxisConfig.scaleX()(i) - 12 + index * 10;
+                        return bc.AxisConfig.scaleX()(i) - 18 + index * 14;
                     },
                     y: function (d) {
                         return bc.AxisConfig.scaleY()(d[key3][name]);
@@ -138,7 +138,7 @@ var gRect = function (bc, board) {
                         let step = $c.val('dataUnit') === 'day' ? 2 : 1;
                         return i % step === 0 ? y0 - bc.AxisConfig.scaleY()(d[key3][name]) : 0;
                     },
-                    w: 8,
+                    w: 12,
                     rx: radius,
                     ry: radius
                 },
