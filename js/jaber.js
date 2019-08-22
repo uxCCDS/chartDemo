@@ -243,6 +243,7 @@ var gArc2 = function (bc, board, cStart) {
 
         },
         pie: {
+            endAngle: Math.PI * 3/2,
             value: function (d) {
                 return d.value;
             },

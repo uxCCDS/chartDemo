@@ -270,6 +270,7 @@ var gArc2 = function (bc, board, cStart) {
             value: function (d) {
                 return d.value;
             },
+            endAngle: Math.PI * 3/2,
             sortValues: publicSort
         },
         modify: {
