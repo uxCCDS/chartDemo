@@ -27,4 +27,58 @@
 .progressCanvas>div {
     width: 1290px;
     height: 52px;
+    position: relative;
 }
+
+.timeContorlArea {
+    position: absolute;
+    z-index: 10;
+    top: 0px;
+    left: 0px;
+    background:rgba(255,199,186,0.2);
+    width: 40px;
+    height: 52px;
+    cursor: move;
+}
+
+.timeContorl {
+    position: absolute;
+    top: 0px;
+    background: #148579;
+    width: 1px;
+    height: 52px;
+    user-select:none;
+}
+
+.timeContorlR {
+    right: 0px;
+}
+
+.timeContorlL{
+    left: 0px;
+}
+
+.timeContorl>span{
+    display: block;
+    width: 24px;
+    height: 10px;
+    line-height: 10px;
+    position: absolute;
+    background: #148579;
+    top: -10px;
+    font-size: 8px;
+    text-align: center;
+    color: white;
+}
+
+.timeContorlR>span {
+    border-radius: 0 2px 2px 0;
+    left: 0px;
+}
+
+.timeContorlL>span{
+    border-radius: 2px 0 0 2px;
+    right: 0px;
+}
+
+
