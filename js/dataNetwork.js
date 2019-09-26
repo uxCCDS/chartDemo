@@ -7,30 +7,30 @@ var Tempalte = {
             'Web Service': [250, 450, 25],
             'Conferece Service': [25, 230, 3],
             'Media Service': [5, 20, 2],
-            'SIP/H323': [5, 25, 2],
+            'SIP_H323': [5, 25, 2],
             'threshold': 150
         },
         'PacketLoss': {
             'Web Service': [4, 7, 0],
             'Conferece Service': [3, 4, 0],
             'Media Service': [3, 243, 0],
-            'SIP/H323': [4, 347, 0],
+            'SIP_H323': [4, 347, 0],
             'threshold': 3
         }
     },
-    'Cibbectuib Time': {
-        'TCP / TLS': {
+    'Connection Time': {
+        'TCP _ TLS': {
             'Web Service': [4, 7, 1],
             'Conferece Service': [3, 4, 1],
             'Media Service': [3, 243, 1],
-            'SIP/H323': [4, 347, 1],
+            'SIP_H323': [4, 347, 1],
             'threshold': 150
         },
         'DNS': {
             'Web Service': [5, 6, 1],
             'Conferece Service': [4, 7, 1],
             'Media Service': [4, 6, 1],
-            'SIP/H323': [5, 8, 1],
+            'SIP_H323': [5, 8, 1],
             'threshold': 150
         }
     },
@@ -39,48 +39,48 @@ var Tempalte = {
             'Web Service': [2, 5, 0],
             'Conferece Service': [5, 8, 1],
             'Media Service': [5, 8, 1],
-            'SIP/H323': [4, 6, 1],
+            'SIP_H323': [4, 6, 1],
             threshold: 30
         },
         'Response Time': {
             'Web Service': [2, 5, 1],
             'Conferece Service': [3, 7, 1],
             'Media Service': [51, 250, 1],
-            'SIP/H323': [2, 6, 1],
+            'SIP_H323': [2, 6, 1],
             'threshold': 15
         }
     },
     'Streaming Quality': { // 10000000 0.75
         'Latency': {
             'Media Service': [13, 25, 1],
-            'SIP/H323': [7, 12, 1],
+            'SIP_H323': [7, 12, 1],
             'threshold': 200
         },
         'Packet Loss': {
             'Media Service': [4, 5, 0],
-            'SIP/H323': [3, 6, 0],
+            'SIP_H323': [3, 6, 0],
             'threshold': 8
         },
         'Jetter': {
             'Media Service': [8, 11, 2],
-            'SIP/H323': [10, 14, 2],
+            'SIP_H323': [10, 14, 2],
             'threshold': 150
         },
         'Bitrate': {
             'Media Service': [10, 15, 5],
-            'SIP/H323': [20, 25, 15],
+            'SIP_H323': [20, 25, 15],
         },
         'Frame Rate': {
             'Media Service': [18, 21, 15],
-            'SIP/H323': [22, 25, 18],
+            'SIP_H323': [22, 25, 18],
         },
         'Resolution': {
             'Media Service': [480, 180, 120],
-            'SIP/H323': [360, 160, 120],
+            'SIP_H323': [360, 160, 120],
         }
     }
 };
-var monthDay = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+var DAYMINUTE = 24 * 60;
 
 var DateHelper = function (fromMonth, fromDay, toMonth, toDay) {
     this.FromMonth = fromMonth;
@@ -94,6 +94,7 @@ DateHelper.prototype = {
         var ret = this.getDays(this.FromMonth, this.FromDay, this.ToMonth, this.ToDay);
         this.TotalDays = ret.sum;
         this.DaysBeforeMonth = ret.breaks;
+        this.DaysBeforeMonthArr = ret.breaksArr;
         this.DayList = ret.list;
         this.TotalHours = this.TotalDays * 24;
         this.TotalMinutes = this.TotalHours * 60;
@@ -103,11 +104,13 @@ DateHelper.prototype = {
         var ds, de,
             sum = 0,
             monthDay = {},
+            arr = [],
             list = [];
         for (var i = month1, l = month2 + 1; i < l; i++) {
             ds = i === month1 ? day1 : 1;
             de = i === month2 ? day2 : this.Days[i - 1];
             monthDay[i] = sum;
+            arr.push(sum);
             for (var j = ds; j <= de; j++) {
                 list.push({
                     m: i,
@@ -119,11 +122,37 @@ DateHelper.prototype = {
         return {
             sum: sum,
             breaks: monthDay,
+            breaksArr: arr,
             list: list
         };
     },
     index: function (m, d, h, min) {
         return (this.DaysBeforeMonth[m] + d) * 24 * 60 + h * 60 + min;
+    },
+    getDayByIndex: function (index) {
+        for (var i = 0, l = this.DaysBeforeMonthArr.length; i < l; i++) {
+            if(this.DaysBeforeMonthArr[i]>index){
+                break;
+            }
+        }
+        var monthIndex = i-1;
+        return {
+            m: this.FromMonth+monthIndex,
+            d: index - this.DaysBeforeMonthArr[monthIndex]
+        }
+    },
+    daytime: function (index) {
+        var days = index / DAYMINUTE >> 0,
+            _rest1 = index % DAYMINUTE,
+            hours = _rest1 / 60 >> 0,
+            minutes = _rest1 % 60,
+            d = this.getDayByIndex(days);
+        return {
+            m: d.m,
+            d: d.d,
+            h: hours,
+            min: minutes
+        }
     },
     len: function (m1, d1, h1, min1, m2, d2, h2, min2) {
         return this.index(m2, d2, h2, min2) - this.index(m1, d1, h1, min1);
@@ -185,21 +214,30 @@ var FakeData = function (fromMonth, fromDay, toMonth, toDay) {
 };
 FakeData.prototype = {
     init: function () {
-        var data = {};
+        var data = {},
+            scale = {};
         for (var t in this.Tempalte) {
             data[t] = {};
+            scale[t] = {};
             for (var p in this.Tempalte[t]) {
                 data[t][p] = {};
+                
+                var min = Infinity,
+                    max = - Infinity;
                 for (var n in this.Tempalte[t][p]) {
                     if (n !== 'threshold') {
+                        min = Math.min(min, this.Tempalte[t][p][n][2]);
+                        max = Math.max(max, this.Tempalte[t][p][n][1]);
                         data[t][p][n] = this.Calender.eachMinute(this.generate, this.Tempalte[t][p][n]);
                     } else {
                         data[t][p][n] = this.Tempalte[t][p][n];
                     }
                 }
+                scale[t][p] = [min, max];                
             }
         }
         this.Data = data;
+        this.Scale = scale;
     },
     Tempalte: Tempalte,
     generate: function (config) {
@@ -207,10 +245,10 @@ FakeData.prototype = {
         var min = config[2],
             max = config[1],
             mid = config[0],
-            m1 = (mid-min)/2,
-            m2 = (max-mid)/2;
+            m1 = (mid - min) / 2,
+            m2 = (max - mid) / 2;
 
-        if (randomHelp(0, m1+m2) < m1) {
+        if (randomHelp(0, m1 + m2) < m1) {
             return randomHelp(mid, max);
         } else {
             return randomHelp(min, mid);
@@ -240,23 +278,35 @@ FakeData.prototype = {
         }
         return ret;
     },
-    zoomRandom: function(data, areaLength, step, base) {
+    zoom1st: function (data, areaLength, step) {
         var stepDataLength = data.length / areaLength * step >> 0,
-        last = data.length % stepDataLength,
-        len = data.length / stepDataLength >> 0,
-        ret = [],
-        i = 0,
-        l = len - 1;
+            last = data.length % stepDataLength,
+            len = data.length / stepDataLength >> 0,
+            ret = [],
+            i = 0,
+            l = len;
         for (; i < l; i++) {
-            ret.push(this.randomArray(data.slice(i, i + stepDataLength),base));
-        }
-        if (last !== 0) {
-            i++;
-            ret.push(this.randomArray(data.slice(i, i + last),base));
+            ret.push(data[i]);
         }
         return ret;
     },
-    randomArray: function(arr, base) {
+    zoomRandom: function (data, areaLength, step, base) {
+        var stepDataLength = data.length / areaLength * step >> 0,
+            last = data.length % stepDataLength,
+            len = data.length / stepDataLength >> 0,
+            ret = [],
+            i = 0,
+            l = len - 1;
+        for (; i < l; i++) {
+            ret.push(this.randomArray(data.slice(i, i + stepDataLength), base));
+        }
+        if (last !== 0) {
+            i++;
+            ret.push(this.randomArray(data.slice(i, i + last), base));
+        }
+        return ret;
+    },
+    randomArray: function (arr, base) {
         var sum = 0,
             i = 0,
             l = arr.length,
@@ -268,11 +318,11 @@ FakeData.prototype = {
             sum += arr[i];
         }
         var mid = sum / l;
-        if(mid>base[1]){
+        if (mid > base[1]) {
             return max;
-        }else if(mid<base[0]){
+        } else if (mid < base[0]) {
             return min;
-        }else {
+        } else {
             return mid;
         }
     },

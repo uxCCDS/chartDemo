@@ -46,15 +46,15 @@
     top: 0px;
     background: #148579;
     width: 1px;
-    height: 52px;
+    height: 100%;
     user-select:none;
 }
 
-.timeContorlR {
+.timeContorlR, .timeContorlR2{
     right: 0px;
 }
 
-.timeContorlL{
+.timeContorlL, .timeContorlL2{
     left: 0px;
 }
 
@@ -71,14 +71,94 @@
     color: white;
 }
 
-.timeContorlR>span {
+.timeContorlR>span, .timeContorlL2>span {
     border-radius: 0 2px 2px 0;
     left: 0px;
 }
 
-.timeContorlL>span{
+.timeContorlL>span, .timeContorlR2>span{
     border-radius: 2px 0 0 2px;
     right: 0px;
 }
 
+.legend {
+    margin-top: 40px;
+    width: 1290px;
+    height: 15px;
+    position: relative;
+}
 
+.legend>div {
+    display: inline-block;
+    height: 15px;
+    line-height: 15px;
+    font-size: 10px;
+    color: #4A4A4A;
+    margin-left: 20px;
+}
+
+.legend>.legend-settings{
+    color: #00A0D1;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+
+.legend>div>i {
+    display: inline-block;
+    width: 11px;
+    height: 3px;
+    position: relative;
+    margin-right: 6px;
+    top: -2px;
+}
+
+.legend>div>.legend-orange{
+    background: #FF7A37;
+}
+.legend>div>.legend-pink{
+    background: #D524E5;
+}
+.legend>div>.legend-darkblue{
+    background: #0B64BF;
+}
+.legend>div>.legend-blue{
+    background: #00B8F1;
+}
+.legend>div>.legend-dot{
+    top: 0px;
+    width: 15px;
+    border-top: 1px dashed #9B9B9B;
+}
+
+.legend>div:first-child {
+    margin-left: 135px;
+}
+
+.main-chart {
+    width: 1290px;
+    flex-direction: row;
+    margin-top: 5px;
+    display: flex;
+}
+
+.main-chart-l {
+    position: relative;
+    width: 771px;
+    flex: none;
+}
+
+.main-chart-l>div{
+    width: 100%;
+    display: block;
+}
+
+.main-chart-r {
+    display: flex;
+    width: 525px;
+    flex: 1;
+}
+
+.boardAxis {
+    margin-bottom: 15px;
+}
