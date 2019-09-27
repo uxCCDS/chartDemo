@@ -12,6 +12,7 @@ var CONFIG = $c.database({
     areaLen: 636,
     padding: 135,
     whole: 771,
+    range: {}
 });
 
 var PBar = function (id, dataUrl, root) {
@@ -87,7 +88,7 @@ PBar.prototype = {
         this.BarLarge.innerHTML = text;
     },
     f: function (t) {
-        return t > 10 ? t : '0' + t;
+        return t >= 10 ? t : '0' + t;
     },
     update: function (h, m) {
         this.text(this.f(h) + ':' + this.f(m));
@@ -182,6 +183,11 @@ ProgressCanvas.prototype = {
         this.X1Max = this.date2X(this.LastDayIndex - 1, 23, 59);
         this.X2Min = this.day2X(1);
         this.X2Max = this.date2X(this.LastDayIndex, 23, 59);
+        var me = this;
+        CONFIG.val('range', me.date());
+        this.Database.bind('', function(v){
+            CONFIG.val('range', me.date());
+        });
     },
     filterX: function (x) {
         if (x < this.X1Min) {
@@ -387,7 +393,7 @@ Axis.prototype = {
 
     },
     f: function (t) {
-        return t > 10 ? t : '0' + t;
+        return t >= 10 ? t : '0' + t;
     },
     init: function () {
         var me = this;
@@ -441,7 +447,7 @@ Axis.prototype = {
             }
         })
 
-        this.Progress.Database.bind('', function () {
+        this.Progress.Database.bind('', function (v) {            
             me.prepare();
             me.Board.render('tickets', me.Config.tickets);
         });
@@ -454,33 +460,42 @@ var DataBoard = function (id) {
     this.Id = id;
     this.DomID = 'board' + id.replace(/\t|\s|\n|\r/g, '');
     this.First = [];
-    var _prop = this.getPropNum(DATA.Data[this.Id]);
+    this.SourceData = DATA.Data[this.Id];
+    var _prop = this.getPropNum(this.SourceData);
     this.Props = _prop.props
     this.BlockNum = _prop.num;
-    this.Step = 12;
+    this.Step = 53;
     this.Top = 20;
     this.Bottom = 50;
     this.BlockHeight = 80;
-    this.Height = this.BlockNum * this.BlockHeight + this.Top + this.Bottom;
+    this.Height = this.BlockNum * this.BlockHeight + this.Top + this.Bottom;    
     this.Board = $c.board('#' + this.DomID, {
         attr: {
             width: CONFIG.val('whole'),
             height: this.Height,
             viewBox: "0 0 " + CONFIG.val('whole') + " " + this.Height
         }
-    }, this.filterData(DATA.Data[this.Id]));
+    }, this.filterData(this.SourceData));
     this.init();
 };
 DataBoard.prototype = {
+    getSliceDataIndex: function() {
+        var me = this,
+            v = CONFIG.val('range'),
+            d1 = v.d1,
+            d2 = v.d2;
+        return DATA.range(d1.m,d1.d,d1.h,d1.min,d2.m,d2.d,d2.h,d2.min);
+    },
     filterDataLine: function (data) {
         var _ret = {},
-            len = CONFIG.val('areaLen');
+            len = CONFIG.val('areaLen'),
+            idx = this.getSliceDataIndex();
         for (var name in data) {
             if (data.hasOwnProperty(name) && name !== 'threshold') {
                 if (this.First.length === 1) {
                     this.First.push(name);
                 }
-                _ret[name] = DATA.zoom1st(data[name], len, this.Step);
+                _ret[name] = DATA.zoomLine(data[name].slice(idx[0],idx[1]), len, this.Step);
             }
         }
         return _ret;
@@ -592,14 +607,6 @@ DataBoard.prototype = {
                 }
             }
         });
-        for (var n in this.Props) {
-            var _props = this.Props[n]
-            this.drawbaselines(_props);
-            this.getPropNum(DATA.Data[this.Id][_props], function (name) {
-                // console.log(_props, name, n);
-                me.drawlines(_props, name, n);
-            });
-        }
 
         // dynamic
         var threshold0 = this.Board.Database.val('thresholds')[0];
@@ -620,7 +627,32 @@ DataBoard.prototype = {
                 }
             }
         });
+        for (var n in this.Props) {
+            var _props = this.Props[n]
+            this.drawbaselines(_props);
+            this.getPropNum(this.SourceData[_props], function (name) {
+                me.drawlines(_props, name, n);
+            });
+        }
         this.Board.render();
+        this.initBind();
+
+    },
+    updateline: function() {
+        var me = this;
+        for (var n in this.Props) {
+            var _props = this.Props[n];
+            var data = me.filterDataLine(this.SourceData[_props]);
+            this.getPropNum(this.SourceData[_props], function (name) {
+                me.Board.render(_props+'/'+name,data[name]);
+            });
+        }
+    },
+    initBind: function() {
+        var me = this;
+        CONFIG.bind('range', function(v){
+            me.updateline();
+        });
     },
     drawlines: function (p1, p2, index) {
         var me = this,
@@ -628,13 +660,13 @@ DataBoard.prototype = {
             bottom = +this.Top + (+index + 1) * this.BlockHeight - this.BlockHeight / 8,
             padding = CONFIG.val('padding'),
             areaLen = CONFIG.val('areaLen');
-        console.log(bottom, top);
+        // console.log(bottom, top);
 
         var ScaleY = $c.scale('scaleLinear', {
             domain: DATA.Scale[this.Id][p1],
             range: [bottom, top]
         }).Scale;
-        console.log(this.Id, p1, p2, index);
+        // console.log(this.Id, p1, p2, index);
         this.Board.line(p1 + '/' + p2, {
             generator: {
                 x: function(d, i) {

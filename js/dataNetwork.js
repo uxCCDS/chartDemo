@@ -75,8 +75,8 @@ var Tempalte = {
             'SIP_H323': [22, 25, 18],
         },
         'Resolution': {
-            'Media Service': [480, 180, 120],
-            'SIP_H323': [360, 160, 120],
+            'Media Service': [480, 720, 120],
+            'SIP_H323': [360, 720, 120],
         }
     }
 };
@@ -131,13 +131,13 @@ DateHelper.prototype = {
     },
     getDayByIndex: function (index) {
         for (var i = 0, l = this.DaysBeforeMonthArr.length; i < l; i++) {
-            if(this.DaysBeforeMonthArr[i]>index){
+            if (this.DaysBeforeMonthArr[i] > index) {
                 break;
             }
         }
-        var monthIndex = i-1;
+        var monthIndex = i - 1;
         return {
-            m: this.FromMonth+monthIndex,
+            m: this.FromMonth + monthIndex,
             d: index - this.DaysBeforeMonthArr[monthIndex]
         }
     },
@@ -221,7 +221,7 @@ FakeData.prototype = {
             scale[t] = {};
             for (var p in this.Tempalte[t]) {
                 data[t][p] = {};
-                
+
                 var min = Infinity,
                     max = - Infinity;
                 for (var n in this.Tempalte[t][p]) {
@@ -233,7 +233,7 @@ FakeData.prototype = {
                         data[t][p][n] = this.Tempalte[t][p][n];
                     }
                 }
-                scale[t][p] = [min, max];                
+                scale[t][p] = [min, max];
             }
         }
         this.Data = data;
@@ -278,15 +278,16 @@ FakeData.prototype = {
         }
         return ret;
     },
-    zoom1st: function (data, areaLength, step) {
-        var stepDataLength = data.length / areaLength * step >> 0,
-            last = data.length % stepDataLength,
+    zoomLine: function (data, areaLength, step) {
+        var stepNum = (areaLength / step >> 0) + 1,
+            stepDataLength = data.length / stepNum >> 0,
             len = data.length / stepDataLength >> 0,
             ret = [],
             i = 0,
             l = len;
+        // console.log(stepDataLength * len, data.length, last , '--');
         for (; i < l; i++) {
-            ret.push(data[i]);
+            ret.push(data[i*stepDataLength]);
         }
         return ret;
     },
