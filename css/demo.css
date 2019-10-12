@@ -1,0 +1,21 @@
+.main{
+    margin: 20px auto;
+    width: 1200px;
+    min-height: 600px;
+    position: relative;
+}
+
+.main svg{
+    display: none;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+.logo{
+    margin: 10px auto;
+    width: 1200px;
+    height: 100px;
+    background:url('../img/momentum-logo_horiz-color_black.png') no-repeat top left;
+    background-size: contain;
+}
