@@ -36,8 +36,8 @@ var SCALE = {
         range: [500,100]
     }).Scale,
     yb:$c.scale('scaleLinear', {
-        domain: [0,200,2000,3000],
-        range: [500,280,220,100]
+        domain: [0,200,2800,3000],
+        range: [500,320,280,100]
     }).Scale,
     x:$c.scale('scaleLinear', {
         domain: [0,8],
@@ -45,7 +45,7 @@ var SCALE = {
     }).Scale,
     x0:$c.scale('scaleLinear', {
         domain: [0,8],
-        range: [600,600]
+        range: [200,200]
     }).Scale,
     y0:$c.scale('scaleLinear', {
         domain: [0,3000],
@@ -59,14 +59,19 @@ $c.Scale.smooth(SCALE.yb,SCALE.y0);
 var DATA = {
     d1: [1000,1200,1400,1100,1000,1500,2000,3000,2800],
     d2: [1400,1600,1800,1000,2000,2500,2800,2200,3000],
+    d3: [400,600,800,2000,2800,2500,2100,2400,2000],
+    d12: [1200,1100,1800,2100,2000,2500,1000,2400,1800],
+    d22: [2400,2600,1800,1200,2200,2100,2200,2400,2900],
+    d32: [1400,200,400,1000,1800,1500,1100,1400,2100],
     b01: [1,1,1,1,1,1,1,1],
+    b02: [1,1,1,1,1,1,1,1,1],
     b0: [0,0,0,0,0,0,0,0],
-    b1: [40,60,180,100,2000,2500,2000,2200],
-    b2: [40,70,170,100,2500,2200,2400,2600],
-    b3: [20,80,120,160,2800,2900,3000,3200],
+    b1: [40,60,180,100,2820,2840,2880,2860],
+    b2: [30,70,170,110,2890,2850,2900,3000],
+    b3: [20,80,120,160,2840,2900,2920,3000],
     range: {
         d:[0,3000],
-        b:[0,200,2000,3000]
+        b:[0,200,2800,3000]
     },
     tick: {
         d: $c.Scale.breakTicks(SCALE.yb),
@@ -189,7 +194,7 @@ var _arc = function(timeline) {
         });
     });
     timeline.add(function(){
-        var transition = arc.transition({ duration: 1000 }, _data2);
+        var transition = arc.transition({ duration: 1000, delay: 100 }, _data2);
         transition.on('end', function(d,i){
             if(i===0){
                 timeline.next();
@@ -284,7 +289,7 @@ var _pie = function(timeline) {
     });
     timeline.add(function(){
         arc2.transition({ duration: 1000 }, _data2);
-        var transition = arc.transition({ duration: 1000 }, _data2);
+        var transition = arc.transition({ duration: 1000, delay: 100 }, _data2);
         transition.on('end', function(d,i){
             if(i===0){
                 timeline.next();
@@ -314,6 +319,9 @@ var _axis = function(timeline) {
         generator: {
           scale: SCALE.x0,
           y: POS.rangeY[0],
+          tickFormat: function(){
+            return '';
+          },
           tickSize: 0
         }
       }, 'x');
@@ -321,6 +329,8 @@ var _axis = function(timeline) {
     AXISX = axisX;
     var axisY;
     board.render();
+    var tickeValue = $c.Scale.ticks(SCALE.yd);
+
     timeline.add(function(){
         BOARDS.fadeIn('_axis');
         var transition = axisX.transition({ duration: 1000 }, {
@@ -329,14 +339,7 @@ var _axis = function(timeline) {
                 y: POS.rangeY[0]
             }
         }).range;
-        transition.on('end', function(d,i){
-            if(i===0){
-                timeline.next();
-            }
-        });
-    });
-    var tickeValue = $c.Scale.ticks(SCALE.yd);
-    timeline.add(function(){
+        
         AXISY = axisY = board.axis('y', {
             generator: {
               scale: SCALE.y0,
@@ -351,12 +354,14 @@ var _axis = function(timeline) {
                 scale: SCALE.yd
             }
         }).range;
+  
         transition.on('end', function(d,i){
             if(i===0){
                 timeline.next();
             }
         });
     });
+    
 };
  
 var _line = function(timeline) {
@@ -434,6 +439,16 @@ var _line = function(timeline) {
         });
     });
     timeline.add(function(){
+        Ash.play([{
+            dom: symbol.Selection.nodes(),
+            css:[{opacity: 1},{opacity:0}],
+            time:20,
+            delay:40
+        }],1,function(){
+            timeline.next();
+        });
+    });
+    timeline.add(function(){
         BOARDS.fadeOut('_line',100);
         Ash.play([{
             dom: line1.Selection.node(),
@@ -449,6 +464,93 @@ var _line = function(timeline) {
     });
 };
 
+var _area = function(timeline) {
+    var board = $c.board('#app', CONFIG_BOARD, {
+        a1: DATA.b02,
+        a2: DATA.b02,
+        a3: DATA.b02
+    });
+    BOARDS.add('_area', board);
+    var area1 = board.area('a1', {
+        generator: {
+            x: function(d,i) {
+                return SCALE.x(i);
+            },
+            y1: function(d) {
+                return SCALE.yd(d);
+            },
+            y0: 500
+        },
+        modify: {
+            style: {
+                fill: COLORS[0],
+                opacity: 0.5
+            }            
+        }
+    });
+    var area2 = board.area('a2', {
+        generator: {
+            x: function(d,i) {
+                return SCALE.x(i);
+            },
+            y1: function(d) {
+                return SCALE.yd(d);
+            },
+            y0: 500
+        },
+        modify: {
+            style: {
+                fill: COLORS[1],
+                opacity: 0.5
+            }            
+        }
+    });
+    var area3 = board.area('a3', {
+        generator: {
+            x: function(d,i) {
+                return SCALE.x(i);
+            },
+            y1: function(d) {
+                return SCALE.yd(d);
+            },
+            y0: 500
+        },
+        modify: {
+            style: {
+                fill: COLORS[2],
+                opacity: 0.5
+            }            
+        }
+    });
+    board.render();
+    timeline.add(function(){
+        BOARDS.show('_area');
+        area1.transition({ duration: 1000 }, DATA.d1);
+        area2.transition({ duration: 1000, delay: 300 }, DATA.d2);
+        var transition = area3.transition({ duration: 1000, delay: 600 }, DATA.d3);
+        transition.on('end', function(d,i){
+            if(i===0){
+                timeline.next();
+            }
+        });
+    });
+    timeline.add(function(){
+        area1.transition({ duration: 1000, delay: 300 }, DATA.d12);
+        area2.transition({ duration: 1000, delay: 300 }, DATA.d22);
+        var transition = area3.transition({ duration: 1000, delay: 300 }, DATA.d32);
+        transition.on('end', function(d,i){
+            if(i===0){
+                timeline.next();
+            }
+        });
+    });
+    timeline.add(function(){
+        BOARDS.fadeOut('_area',30, function(){
+            timeline.next();
+        });
+    });
+};
+
 var _rect = function(timeline) {
     var board = $c.board('#app', CONFIG_BOARD,{
         b1:DATA.b01,
@@ -458,7 +560,7 @@ var _rect = function(timeline) {
     var rect1 = board.rect('b1', {
         generator: {
             x: function(d,i) {
-                return SCALE.x(i)+5;
+                return SCALE.x(i)+20;
             },
             y: function(d) {
                 return SCALE.yd(d);
@@ -479,7 +581,7 @@ var _rect = function(timeline) {
     var rect2 = board.rect('b2', {
         generator: {
             x: function(d,i) {
-                return SCALE.x(i)+30+5;
+                return SCALE.x(i)+30+20;
             },
             y: function(d) {
                 return SCALE.yd(d);
@@ -497,10 +599,36 @@ var _rect = function(timeline) {
             }
         }
     });
+    var breaks = board.break('break', {
+        generator: {
+            w: 800,
+            h: SCALE.yd(200) - SCALE.yd(2800),
+            x: 200,
+            y: SCALE.yd(2800)
+        },
+        modify: {
+            style: {
+                opacity: 0
+            }
+        }
+    });
     rect1.render(DATA.b01);
     rect2.render(DATA.b01);
     timeline.add(function(){
         BOARDS.show('_rect');
+        AXISBOARD.transition({
+                duration: 1000
+            }, 'y', {
+            generator: {
+                tickSize: -800
+            }
+        });
+        setTimeout(function(){
+            timeline.next();
+        },1000);
+    });
+
+    timeline.add(function(){
         rect1.transition({ duration: 1000 }, DATA.b1);
         var transition = rect2.transition({ duration: 1000, delay: 400 }, DATA.b2);
         transition.on('end', function(d,i){
@@ -508,6 +636,21 @@ var _rect = function(timeline) {
                 timeline.next();
             }
         });
+    });
+
+    timeline.add(function(){
+        breaks.animate({
+                duration: 100
+        }, {
+            modify: {
+                style: {
+                    opacity: 0.3
+                }
+            }
+        });
+        setTimeout(function(){
+            timeline.next();
+        }, 100);
     });
 
     timeline.add(function(){
@@ -531,10 +674,25 @@ var _rect = function(timeline) {
                 },
             }
         });
+
+        breaks.animate({
+            duration: 1000
+          }, {
+            modify: {
+                style: {
+                    opacity: 1
+                }
+            }
+          }, {
+            generator: {
+              h: SCALE.yb(200) - SCALE.yb(2800),
+              y: SCALE.yb(2800)
+            }
+        });
+
         rect1.transition({ duration: 1000 }, DATA.b1);
 
-        var tickV2 = $c.Scale.breakTicks(SCALE.yb, { 0: '1', 2: '1' }, 2);
-        console.log(tickV2);
+        var tickV2 = $c.Scale.breakTicks(SCALE.yb, { 0: '1', 2: '1' }, 5);
         AXISBOARD.transition({
                 duration: 1000
             }, 'y', {
@@ -568,6 +726,7 @@ Timeline.prototype = {
         _pie(this);
         _axis(this);
         _line(this);
+        _area(this);
         _rect(this);
         this.show();
         this.BODY.addEventListener('click', function(){

@@ -19,3 +19,15 @@
     background:url('../img/momentum-logo_horiz-color_black.png') no-repeat top left;
     background-size: contain;
 }
+
+.md-chart-break .shape{
+    stroke: none;
+    fill: #fff;
+    opacity: 0.95;
+}
+
+.md-chart-break .border{
+    stroke: #737678;
+    fill: none;
+    opacity: 0.5;
+}
