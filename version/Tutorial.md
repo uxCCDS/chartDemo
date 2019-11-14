@@ -93,10 +93,7 @@ board.render();
 
 [Try it by yourself](https://codepen.io/arthusliang/pen/NWWLBrx)
 
-<iframe height="600" style="width: 100%;" scrolling="no" title="Charts_Template" src="https://codepen.io/arthusliang/embed/NWWLBrx?height=600&theme-id=light&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
-  See the Pen <a href='https://codepen.io/arthusliang/pen/NWWLBrx'>Charts_Template</a> by Arthus
-  (<a href='https://codepen.io/arthusliang'>@arthusliang</a>) on <a href='https://codepen.io'>CodePen</a>.
-</iframe>
+![Get Start](https://codepen.io/arthusliang/pen/NWWLBrx/image/small.png)
 
 # Foundation
 
@@ -136,10 +133,7 @@ board.render();
 
 [Try it by yourself](https://codepen.io/arthusliang/pen/RwwYBYw)
 
-<iframe height="600" style="width: 100%;" scrolling="no" title="Charts_Template" src="https://codepen.io/arthusliang/embed/RwwYBYw?height=600&theme-id=light&default-tab=result" frameborder="no" allowtransparency="true" allowfullscreen="true">
-  See the Pen <a href='https://codepen.io/arthusliang/pen/RwwYBYw'>Charts_Template</a> by Arthus
-  (<a href='https://codepen.io/arthusliang'>@arthusliang</a>) on <a href='https://codepen.io'>CodePen</a>.
-</iframe>
+
 
 In Shapes, Modify is passed as a property of the config. In SVG, the style will overwrite the attr.
 
