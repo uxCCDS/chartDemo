@@ -73,7 +73,7 @@ Momentum Charts will create a SVG node and append it to a HTML dom. In our tutor
 </body>
 ```
 With the following code, Momentum Charts will creat a line chart with the data of an array [5,18,40,50,30]. 
-We will example more details in the following part.
+We will discuss more details in the following part.
 
 ```
 import MomentumCharts from '@momentum-ui/charts';
@@ -105,10 +105,16 @@ board.line({
 
 ```
 
-[Try it yourself >>](https://codepen.io/arthusliang/pen/NWWLBrx?_blank)
+[Try it yourself >>](https://codepen.io/arthusliang/pen/NWWLBrx)
 
 
 # Foundation
+
+## Shape
+
+All the charts components inhert from the class Shape. They are the subclass of Shape.js.
+
+Check more detail in the API of Shape.
 
 ## Modify
 
@@ -154,7 +160,7 @@ board.render();
 
 ```
 
-[Try it by yourself >>](https://codepen.io/arthusliang/pen/RwwYBYw?_blank)
+[Try it by yourself >>](https://codepen.io/arthusliang/pen/RwwYBYw)
 
 ### Modify Shapes
 
@@ -200,7 +206,7 @@ board.line({
 board.render();
 ```
 
-[Try is by yourself >>](https://codepen.io/arthusliang/pen/yLLxqGp?_blank)
+[Try is by yourself >>](https://codepen.io/arthusliang/pen/yLLxqGp)
 
 
 ## Generator
@@ -249,11 +255,172 @@ board.rect({
 board.render();
 ```
 
-[Try is by yourself >>](https://codepen.io/arthusliang/pen/RwwYBzW?_blank)
+[Try is by yourself >>](https://codepen.io/arthusliang/pen/RwwYBzW)
 
-## databind
+## Databind
 
-## event
+Momentum Charts has its own data managerment module. Generally, you can bind data to the board instance. Then you can pass a string as dataUrl to define which data you will use.
+
+#### example
+
+This example show how to use different part of the data object to render different line charts.
+
+![Databind](https://screenshot.codepen.io/3315115.vYYVZdM.small.365eb4a1-7d6c-4418-a8e1-f478a11040f1.png)
+
+#### code
+
+```
+var rootData = {
+  line: {
+    l1: [10, 40, 30, 60, 50],
+    l2: [20, 30, 35, 50, 40]
+  },
+  baseline:[30,30,30,30,30]
+};
+
+var generator = {
+  x: function(d, i) {
+    return 100 + i * 250;
+  },
+  y: function(d) {
+    return 650-d*10;
+  }
+};
+
+var board = MomentumCharts.board('#app', {
+  attr: {
+    width: '1200',
+    height: '700',
+    viewBox: "0 0 1200 700"
+  }
+}, rootData);
+
+console.log(board.data('baseline')); // [30, 30, 30, 30, 30]
+board.data('baseline',[10,10,10,10,10])
+console.log(board.data('baseline')); // [10, 10, 10, 10, 10]
+
+board.line('line/l1', {
+  generator: generator,
+  modify: {
+    attr: {
+      stroke: '#0074a3',
+      'stroke-width': 2
+    }
+  }
+});
+
+board.line('line/l2', {
+  generator: generator,
+  modify: {
+    attr: {
+      stroke: '#ba2f00',
+      'stroke-width': 2
+    }
+  }
+});
+
+board.line('baseline', {
+  generator: generator,
+  modify: {
+    attr: {
+      stroke: '#d2d5d6',
+      'stroke-width': 2
+    }
+  }
+});
+
+board.render();
+```
+
++ board.data
+
+	You can set or get the data of the board according to the function 'data'.
+
++ dataUrl
+
+	Here, we pass ```'line/l1'``` as the dataUrl of the frist line chart. This line chart will as ```data.line.l1``` as its data.
+	
+	If you do not pass a string as the first argument, the line chart will use the root data in the board.
+	
+	The empty string will define a dataUrl for the root data.
+
+[Try is by yourself >>](https://codepen.io/arthusliang/pen/vYYVZdM)
+
+
+## Events
+
+### Event type
+
+The followings are three important events in board.
+
++ data
+
+	The data event will emit when board's data changes.
+
++ render
+
+	The data event will emit when the function ```render``` of board is called.
+
++ transition
+
+	The data event will emit when the function ```transition ``` of board is called.
+	
+### on
+
+Bind a function which will be called when the event is emitted.
+
+
+#### arugment
+
++ eventName
+
+	Refer the Event type Above
+
++ dataUrl
+
+	Refer to the dataUrl in Databind
+
++ callback
+
+	callback function
+	
+```
+board.on('data', '', function(data){
+  console.log('the data under root changed', data);
+});
+```
+
+### off
+
+Unbind a function which will be called when the event is emitted.
+
+#### arugment
+
++ eventName
+
+	Refer the Event type Above
+
++ dataUrl
+
+	Refer to the dataUrl in Databind
+	
++ callback
+
+	function or string. Momentum Charts will add a guid to the functions which have been bund.
+	
+```
+var callback = function(data){
+  console.log('the data under root changed', data);
+};
+board.on('data', '', callback);
+board.off('data', '', callback);
+```
+
+
+[Try is by yourself >>](https://codepen.io/arthusliang/pen/vYYVZdM)
+
+
+## Dom Event
 
 ## template
 
