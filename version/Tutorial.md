@@ -95,6 +95,8 @@ board.render();
 
 ![Get Start](https://codepen.io/arthusliang/pen/NWWLBrx/image/small.png)
 
+![Get Start](https://screenshot.codepen.io/3315115.NWWLBrx.small.c4b8f5b4-7061-4168-b99e-b64ab0978aa1.png)
+
 # Foundation
 
 ## Modify
