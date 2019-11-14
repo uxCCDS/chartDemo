@@ -57,26 +57,42 @@ You can access the library via global varible 'MomentumCharts' or '$c'.
 
 ## Your first chart
 
-The following code shows the usage in Node
+At first, we are going to teach you how to draw a simple line.
+
+#### Example
+
+![Get Start](https://screenshot.codepen.io/3315115.NWWLBrx.small.c4b8f5b4-7061-4168-b99e-b64ab0978aa1.png)
+
+#### Code
+
+Momentum Charts will create a SVG node and append it to a HTML dom. In our tutorial, we create an empty Div with the id of 'app'.
 
 ```
-import { Board } from '@momentum-ui/charts';
+<body>
+  <div id='app'></div>
+</body>
+```
+With the following code, Momentum Charts will creat a line chart with the data of an array [5,18,40,50,30]. 
+We will example more details in the following part.
 
-cosnt board = new Board('#Id', {
+```
+import MomentumCharts from '@momentum-ui/charts';
+
+let board = MomentumCharts.board('#app', {
     attr: {
-      width: '600',
-      height: '400',
-      viewBox: "0 0 600 400"
+      width: '1200',
+      height: '700',
+      viewBox: "0 0 1200 700"
     }
- }, [15,28,52,63,40]);
+ }, [5,18,40,50,30]);
 
 board.line({
     generator: {
         x: function(d, i) {
-            return 50 + i * 100;
+            return 100 + i * 250;
         },
         y: function(d) {
-            return 300-d*3;
+            return 650-d*10;
         }
     },
     modify: {
@@ -87,15 +103,10 @@ board.line({
     }
 });
 
-board.render();
-
 ```
 
-[Try it by yourself](https://codepen.io/arthusliang/pen/NWWLBrx)
+[Try it yourself >>](https://codepen.io/arthusliang/pen/NWWLBrx?_blank)
 
-![Get Start](https://codepen.io/arthusliang/pen/NWWLBrx/image/small.png)
-
-![Get Start](https://screenshot.codepen.io/3315115.NWWLBrx.small.c4b8f5b4-7061-4168-b99e-b64ab0978aa1.png)
 
 # Foundation
 
@@ -110,19 +121,28 @@ Modify object is used to set the properties of SVG node in Momentum Charts. You 
 + text
 + html
 
-In Board, Modify is passed as the second argument.
+### Modify Board
+
+In Board, Modify is passed as the second argument. 
+
+#### Example
+
+This example will adjust the 'box-shadow' and 'class' of an board instance.
+
+![Modify Board](https://screenshot.codepen.io/3315115.RwwYBYw.small.3b7d3157-59e2-4d13-9a68-d930acf2a3a6.png)
+
+#### Code
 
 ```
 var ifShowClass = true;
 var board = MomentumCharts.board('#app', {
   attr: {
-    width: '600',
-    height: '400',
-    viewBox: "0 0 600 400"
+    width: '1200',
+    height: '700',
+    viewBox: "0 0 1200 700"
   },
   style: {
     'box-shadow':'0 1px 2px 0 rgba(0,0,0,0.2),0 2px 4px 0 rgba(0,0,0,0.2)',
-    'margin-top':'10px'
   },
   classed: {
     'my-class': function() {
@@ -131,88 +151,105 @@ var board = MomentumCharts.board('#app', {
   }
 });
 board.render();
+
 ```
 
-[Try it by yourself](https://codepen.io/arthusliang/pen/RwwYBYw)
+[Try it by yourself >>](https://codepen.io/arthusliang/pen/RwwYBYw?_blank)
 
-
+### Modify Shapes
 
 In Shapes, Modify is passed as a property of the config. In SVG, the style will overwrite the attr.
 
-[Try is by yourself](https://codepen.io/arthusliang/pen/yLLxqGp)
+#### Example
 
+This example shows how to apply dash-array style to line chart.
+
+![Modify Shapes](https://screenshot.codepen.io/3315115.yLLxqGp.small.d1d1e9bb-88b6-4e76-884a-75c878113c4c.png)
+
+#### Code
 
 ```
 var board = MomentumCharts.board('#app', {
   attr: {
-    width: '1000',
-    height: '400',
-    viewBox: "0 0 1000 400"
-  },
-  style: {
-    'box-shadow':'0 1px 2px 0 rgba(0,0,0,0.2),0 2px 4px 0 rgba(0,0,0,0.2)',
-    'margin-top':'10px'
+    width: '1200',
+    height: '700',
+    viewBox: "0 0 1200 700"
   }
-}, [15,28,52,63,40]);
+ }, [5,18,40,50,30]);
 
 board.line({
   generator: {
     x: function(d, i) {
-      return 50 + i * 150;
+      return 100 + i * 250;
     },
     y: function(d) {
-      return 300-d*3;
+      return 650-d*10;
     }
   },
-   modify: {
+  modify: {
     attr: {
-      stroke: 'red',
+      stroke: '#0090C4',
       'stroke-width': 2
     },
     style: {
-      stroke: '#0090C4',
+      'stroke-dasharray':"10 5"
     }
   }
 });
 
 board.render();
 ```
+
+[Try is by yourself >>](https://codepen.io/arthusliang/pen/yLLxqGp?_blank)
+
 
 ## Generator
 
 Generator is used to define how to map the data to the shape's properies. The Generator is passed as a property of the config in Shape. The properties should accept both value and function. Different shape acceopt different properties.
 
-[Try is by yourself](https://codepen.io/arthusliang/pen/RwwYBzW)
+#### Example
 
+The example shows how to create a bar chart based on an array.
+
+![Generator](https://screenshot.codepen.io/3315115.RwwYBzW.small.8629c529-6374-4c91-9de2-41e48fa791e1.png)
+
+#### Code
 
 ```
 var board = MomentumCharts.board('#app', {
     attr: {
-      width: '1000',
-      height: '400',
-      viewBox: "0 0 1000 400"
+      width: '1200',
+      height: '700',
+      viewBox: "0 0 1200 700"
     }
- }, [10,20,30,40,50,60,40,50,60,40,50,60]);
+ }, [15,28,30,20,30,40,48,30,50,40]);
 
-board.line({
+board.rect({
     generator: {
         x: function(d, i) {
-            return 10 + i * 50;
+            return 100 + i * 100;
         },
         y: function(d) {
-            return 300-d;
-        }
+            return 650-d*10;
+        },
+        w: 40,
+        h: function(d) {
+            return d*10;
+        },
+        rx: [4,4,0,0],
+        ry: [4,4,0,0]
     },
     modify: {
-      attr: {
-        stroke: 'red',
-        'stroke-width': 2
-      }
+        attr: {
+            fill: '#0090C4'
+        }
     }
 });
 
 board.render();
 ```
+
+[Try is by yourself >>](https://codepen.io/arthusliang/pen/RwwYBzW?_blank)
 
 ## databind
 
