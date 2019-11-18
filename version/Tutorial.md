@@ -108,13 +108,11 @@ board.line({
 [Try it yourself >>](https://codepen.io/arthusliang/pen/NWWLBrx)
 
 
-# Foundation
-
-## Shape
+## Board & Shape
 
 All the charts components inhert from the class Shape. They are the subclass of Shape.js.
 
-Check more detail in the API of Shape.
+Check more detail in the API documents.
 
 ## Modify
 
@@ -419,25 +417,3 @@ board.off('data', '', callback);
 
 [Try is by yourself >>](https://codepen.io/arthusliang/pen/vYYVZdM)
 
-
-## Dom Event
-
-## template
-
-## color system
-
-## scale
-
-# Professional
-
-## break
-
-## responsive
-
-## preload
-
-## create your own shape
-
-## create your own template
-
-## contributing
